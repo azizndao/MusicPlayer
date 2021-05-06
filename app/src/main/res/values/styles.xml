@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="Widget.App.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+    <item name="tabTextAppearance">?textAppearanceBody1</item>
+    <item name="tabIndicator">@drawable/tab_indicator</item>
+    <item name="tabIndicatorHeight">4dp</item>
+    <item name="tabGravity">fill</item>
+    <item name="tabIndicatorFullWidth">false</item>
+    <item name="tabMode">auto</item>
+  </style>
+
+  <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Surface">
+  </style>
+</resources>

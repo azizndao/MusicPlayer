@@ -1,0 +1,19 @@
+<resources>
+  <string-array name="home_tabs">
+    <item>@string/playlists</item>
+    <item>@string/albums</item>
+    <item>@string/artists</item>
+    <item>@string/songs</item>
+  </string-array>
+  <string name="app_name">Music Player</string>
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="playlists">Playlists</string>
+  <string name="albums">Albums</string>
+  <string name="artists">Artists</string>
+  <string name="songs">Songs</string>
+  <string name="internal_storage">Phone</string>
+  <string name="external_storage">SD Card</string>
+  <string name="with_separator">%s - %s</string>
+  <string name="all_songs">All songs</string>
+  <string name="others">Others</string>
+</resources>
