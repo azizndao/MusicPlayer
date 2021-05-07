@@ -16,4 +16,7 @@
   <string name="with_separator">%s - %s</string>
   <string name="all_songs">All songs</string>
   <string name="others">Others</string>
+  <string name="numberOfSongs">%s songs</string>
+  <string name="play_all">Play all</string>
+  <string name="random">Randomly</string>
 </resources>

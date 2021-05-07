@@ -27,7 +27,7 @@ class AlbumListFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     with(binding) {
-      albums.layoutManager = GridLayoutManager(requireContext(), 3)
+      albums.layoutManager = GridLayoutManager(requireContext(), 2)
       albums.adapter = AlbumListAdapter().also { adapter ->
         viewModel.getAlbums().observe(viewLifecycleOwner) { data -> adapter.submitList(data) }
       }

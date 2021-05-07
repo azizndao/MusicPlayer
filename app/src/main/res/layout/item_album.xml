@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <data>
 
     <variable
       name="album"
       type="com.musicplayer.models.Album" />
+
+    <variable
+      name="onClick"
+      type="android.view.View.OnClickListener" />
   </data>
 
-  <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+  <com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/album_item_margin">
+    android:layout_margin="@dimen/album_item_margin"
+    android:onClick="@{onClick}">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@color/white"
-      android:padding="@dimen/album_item_margin">
+      android:layout_height="match_parent">
 
       <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/album_art"
+        albumArtFromId="@{album.id}"
         albumArtPlaceholder="@{@drawable/album_placeholder}"
-        glideSrc="@{album.id}"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
@@ -36,6 +40,7 @@
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4dp"
         android:layout_marginTop="@dimen/album_item_margin"
         android:ellipsize="end"
         android:maxLines="1"
@@ -49,6 +54,7 @@
         android:id="@+id/artist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@{album.artist}"
@@ -61,10 +67,13 @@
         android:id="@+id/song_count"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginBottom="4dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="@{``+album.songCount}"
+        android:text="@{@string/numberOfSongs(album.songCount)}"
         android:textAppearance="?textAppearanceCaption"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/artist" />

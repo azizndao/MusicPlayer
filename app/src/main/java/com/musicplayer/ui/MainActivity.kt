@@ -3,6 +3,7 @@ package com.musicplayer.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import com.musicplayer.R
 import com.musicplayer.databinding.ActivityMainBinding

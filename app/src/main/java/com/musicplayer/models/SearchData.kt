@@ -1,7 +1,7 @@
 package com.musicplayer.models
 
-import com.musicplayer.utils.BeatConstants.ALBUM_TYPE
-import com.musicplayer.utils.BeatConstants.ARTIST_TYPE
+import com.musicplayer.utils.Constants.ALBUM_TYPE
+import com.musicplayer.utils.Constants.ARTIST_TYPE
 
 data class SearchData(
     var songList: MutableList<Song> = mutableListOf(),

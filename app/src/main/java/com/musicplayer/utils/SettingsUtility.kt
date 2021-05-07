@@ -2,8 +2,8 @@ package com.musicplayer.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.musicplayer.utils.BeatConstants.AUTO_THEME
-import com.musicplayer.utils.BeatConstants.NORMAL_TRANSFORMER
+import com.musicplayer.utils.Constants.AUTO_THEME
+import com.musicplayer.utils.Constants.NORMAL_TRANSFORMER
 import com.musicplayer.utils.SortModes.AlbumModes.Companion.ALBUM_A_Z
 import com.musicplayer.utils.SortModes.ArtistModes.Companion.ARTIST_A_Z
 import com.musicplayer.utils.SortModes.SongModes.Companion.SONG_A_Z

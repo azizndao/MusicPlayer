@@ -25,9 +25,9 @@ import com.musicplayer.models.Queue
 import com.musicplayer.playback.PlaybackConnection
 import com.musicplayer.repository.FavoritesRepository
 import com.musicplayer.ui.viewmodels.base.CoroutineViewModel
-import com.musicplayer.utils.BeatConstants.BIND_STATE_BOUND
-import com.musicplayer.utils.BeatConstants.BIND_STATE_CANCELED
-import com.musicplayer.utils.BeatConstants.SET_MEDIA_STATE
+import com.musicplayer.utils.Constants.BIND_STATE_BOUND
+import com.musicplayer.utils.Constants.BIND_STATE_CANCELED
+import com.musicplayer.utils.Constants.SET_MEDIA_STATE
 import com.musicplayer.utils.GeneralUtils
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main

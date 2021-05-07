@@ -11,10 +11,10 @@ import com.musicplayer.models.Song
 import com.musicplayer.playback.PlaybackConnection
 import com.musicplayer.repository.FavoritesRepository
 import com.musicplayer.ui.viewmodels.base.CoroutineViewModel
-import com.musicplayer.utils.BeatConstants.PLAY_SONG_FROM_INTENT
-import com.musicplayer.utils.BeatConstants.QUEUE_LIST_TYPE_KEY
-import com.musicplayer.utils.BeatConstants.SONG_KEY
-import com.musicplayer.utils.BeatConstants.UPDATE_QUEUE
+import com.musicplayer.utils.Constants.PLAY_SONG_FROM_INTENT
+import com.musicplayer.utils.Constants.QUEUE_LIST_TYPE_KEY
+import com.musicplayer.utils.Constants.SONG_KEY
+import com.musicplayer.utils.Constants.UPDATE_QUEUE
 import com.musicplayer.utils.SettingsUtility.Companion.QUEUE_INFO_KEY
 import com.musicplayer.utils.SettingsUtility.Companion.QUEUE_LIST_KEY
 import kotlinx.coroutines.Dispatchers.Main

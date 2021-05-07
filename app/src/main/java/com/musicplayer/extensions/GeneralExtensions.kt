@@ -4,7 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
-import com.musicplayer.utils.BeatConstants.READ_ONLY_MODE
+import com.musicplayer.utils.Constants.READ_ONLY_MODE
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.FileNotFoundException

@@ -1,7 +1,7 @@
 package com.musicplayer.models
 
 import android.database.Cursor
-import com.musicplayer.utils.BeatConstants.ARTIST_TYPE
+import com.musicplayer.utils.Constants.ARTIST_TYPE
 import com.google.gson.Gson
 
 data class Artist(

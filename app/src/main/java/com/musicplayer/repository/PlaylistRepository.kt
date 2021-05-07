@@ -7,7 +7,7 @@ import com.musicplayer.db.DBHelper
 import com.musicplayer.extensions.toList
 import com.musicplayer.models.Playlist
 import com.musicplayer.models.Song
-import com.musicplayer.utils.BeatConstants
+import com.musicplayer.utils.Constants
 
 interface PlaylistRepository {
     @Throws(IllegalStateException::class)
@@ -74,7 +74,7 @@ class PlaylistRepositoryImplementation(context: Context) : DBHelper(context),
             it.playListId = id
             val contentValues = ContentValues()
             val values = it.values()
-            it.columns(BeatConstants.PLAY_LIST_TYPE).mapIndexed { i, column ->
+            it.columns(Constants.PLAY_LIST_TYPE).mapIndexed { i, column ->
                 contentValues.put(column, values[i])
             }
             contentValues

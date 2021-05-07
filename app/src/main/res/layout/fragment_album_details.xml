@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <variable
+      name="album"
+      type="com.musicplayer.models.Album" />
+  </data>
+
+  <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionGroup="true"
+    android:transitionName="album_details"
+    tools:context=".ui.fragments.AlbumDetailsFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/app_bar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:liftOnScroll="true">
+
+      <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_scrollFlags="scroll"
+        app:showBackButton="@{true}"
+        app:title="@{album.title}"
+        tools:navigationIcon="@drawable/ic_arrow_back"
+        tools:title="@string/albums" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/elements"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      tools:itemCount="15"
+      tools:listitem="@layout/item_song" />
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

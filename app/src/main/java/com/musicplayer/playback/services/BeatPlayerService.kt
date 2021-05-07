@@ -18,15 +18,15 @@ import com.musicplayer.playback.players.BeatPlayer
 import com.musicplayer.playback.receivers.BecomingNoisyReceiver
 import com.musicplayer.playback.services.base.CoroutineService
 import com.musicplayer.repository.*
-import com.musicplayer.utils.BeatConstants
-import com.musicplayer.utils.BeatConstants.BY_UI_KEY
-import com.musicplayer.utils.BeatConstants.NEXT
-import com.musicplayer.utils.BeatConstants.NOTIFICATION_ID
-import com.musicplayer.utils.BeatConstants.PAUSE_ACTION
-import com.musicplayer.utils.BeatConstants.PLAY_ACTION
-import com.musicplayer.utils.BeatConstants.PLAY_PAUSE
-import com.musicplayer.utils.BeatConstants.PREVIOUS
-import com.musicplayer.utils.BeatConstants.SONG_ID_DEFAULT
+import com.musicplayer.utils.Constants
+import com.musicplayer.utils.Constants.BY_UI_KEY
+import com.musicplayer.utils.Constants.NEXT
+import com.musicplayer.utils.Constants.NOTIFICATION_ID
+import com.musicplayer.utils.Constants.PAUSE_ACTION
+import com.musicplayer.utils.Constants.PLAY_ACTION
+import com.musicplayer.utils.Constants.PLAY_PAUSE
+import com.musicplayer.utils.Constants.PREVIOUS
+import com.musicplayer.utils.Constants.SONG_ID_DEFAULT
 import com.musicplayer.utils.SettingsUtility
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers.IO
@@ -128,7 +128,7 @@ class BeatPlayerService : CoroutineService(Main), KoinComponent {
         clientPackageName: String,
         clientUid: Int,
         rootHints: Bundle?
-    ): BrowserRoot? {
+    ): BrowserRoot {
         val caller = if (clientPackageName == applicationContext.packageName) {
             CALLER_SELF
         } else {
@@ -170,28 +170,28 @@ class BeatPlayerService : CoroutineService(Main), KoinComponent {
         val mediaId = parentId.toMediaId()
 
         when (mediaId.type) {
-            BeatConstants.SONG_TYPE -> launch {
+            Constants.SONG_TYPE -> launch {
                 list.addAll(songsRepository.loadSongs().toMediaItemList())
             }
-            BeatConstants.ALBUM_TYPE -> launch {
+            Constants.ALBUM_TYPE -> launch {
                 list.addAll(
                     albumsRepository.getSongsForAlbum(mediaId.caller?.toLong() ?: 0)
                         .toMediaItemList()
                 )
             }
-            BeatConstants.PLAY_LIST_TYPE -> launch {
+            Constants.PLAY_LIST_TYPE -> launch {
                 list.addAll(
                     playlistRepository.getSongsInPlaylist(mediaId.caller?.toLong() ?: 0)
                         .toMediaItemList()
                 )
             }
-            BeatConstants.FOLDER_TYPE -> launch {
+            Constants.FOLDER_TYPE -> launch {
                 val ids = Gson().fromJson<LongArray>(mediaId.caller ?: "{}")
                 list.addAll(
                     foldersRepository.getSongs(ids).toMediaItemList()
                 )
             }
-            BeatConstants.FAVORITE_TYPE -> launch {
+            Constants.FAVORITE_TYPE -> launch {
                 list.addAll(
                     favoritesRepository.getSongsForFavorite(mediaId.caller?.toLong() ?: 0)
                         .toMediaItemList()

@@ -4,7 +4,7 @@ import android.content.Context
 import com.musicplayer.models.ExtraInfo
 import com.musicplayer.models.Song
 import com.musicplayer.repository.SongsRepositoryImplementation
-import com.musicplayer.utils.BeatConstants.SONG_ID_DEFAULT
+import com.musicplayer.utils.Constants.SONG_ID_DEFAULT
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.audio.exceptions.CannotReadException
 import org.jaudiotagger.audio.exceptions.CannotWriteException

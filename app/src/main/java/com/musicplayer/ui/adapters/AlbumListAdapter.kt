@@ -2,11 +2,13 @@ package com.musicplayer.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.musicplayer.databinding.ItemAlbumBinding
 import com.musicplayer.models.Album
+import com.musicplayer.ui.fragments.HomeFragmentDirections
 
 
 class AlbumListAdapter : ListAdapter<Album, AlbumViewHolder>(AlbumItemDiffUtil) {
@@ -20,13 +22,17 @@ class AlbumListAdapter : ListAdapter<Album, AlbumViewHolder>(AlbumItemDiffUtil) 
   }
 }
 
-class AlbumViewHolder(private val binding: ItemAlbumBinding) :
-  RecyclerView.ViewHolder(binding.root) {
+class AlbumViewHolder(
+  private val binding: ItemAlbumBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
   fun bind(data: Album) {
     with(binding) {
       album = data
-      root.setOnClickListener { }
+      setOnClick {
+        it.findNavController()
+          .navigate(HomeFragmentDirections.actionHomeFragmentToAlbumDetailsFragment(data.id))
+      }
     }
   }
 

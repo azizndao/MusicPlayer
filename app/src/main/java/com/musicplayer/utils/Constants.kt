@@ -3,7 +3,7 @@ package com.musicplayer.utils
 import android.net.Uri
 import android.provider.MediaStore
 
-object BeatConstants {
+object Constants {
 
     const val SONG_ID_DEFAULT = -7173L
     const val CHANNEL_ID = "beatplayer_channel_id"

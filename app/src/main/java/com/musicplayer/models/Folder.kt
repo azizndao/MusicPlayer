@@ -1,7 +1,7 @@
 package com.musicplayer.models
 
 import android.content.Context
-import com.musicplayer.utils.BeatConstants.FOLDER_TYPE
+import com.musicplayer.utils.Constants.FOLDER_TYPE
 import com.musicplayer.extensions.fixedName
 import com.musicplayer.extensions.fixedPath
 import com.google.gson.Gson

@@ -3,9 +3,9 @@ package com.musicplayer.models
 import android.database.Cursor
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaDescriptionCompat
-import com.musicplayer.utils.BeatConstants.FAVORITE_TYPE
-import com.musicplayer.utils.BeatConstants.SONG_ID_DEFAULT
-import com.musicplayer.utils.BeatConstants.SONG_TYPE
+import com.musicplayer.utils.Constants.FAVORITE_TYPE
+import com.musicplayer.utils.Constants.SONG_ID_DEFAULT
+import com.musicplayer.utils.Constants.SONG_TYPE
 import com.musicplayer.utils.GeneralUtils.getAlbumArtUri
 import com.musicplayer.utils.GeneralUtils.getSongUri
 import com.musicplayer.extensions.fix

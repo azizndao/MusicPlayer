@@ -25,10 +25,10 @@ import com.musicplayer.extensions.optimize
 import com.musicplayer.extensions.systemService
 import com.musicplayer.extensions.toFileDescriptor
 import com.musicplayer.models.Song
-import com.musicplayer.utils.BeatConstants.ARTWORK_URI
-import com.musicplayer.utils.BeatConstants.SEEK_TO_POS
-import com.musicplayer.utils.BeatConstants.SONG_LIST_NAME
-import com.musicplayer.utils.BeatConstants.SONG_URI
+import com.musicplayer.utils.Constants.ARTWORK_URI
+import com.musicplayer.utils.Constants.SEEK_TO_POS
+import com.musicplayer.utils.Constants.SONG_LIST_NAME
+import com.musicplayer.utils.Constants.SONG_URI
 import com.musicplayer.utils.SettingsUtility.Companion.QUEUE_INFO_KEY
 import timber.log.Timber
 import java.io.File

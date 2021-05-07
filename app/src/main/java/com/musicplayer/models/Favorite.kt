@@ -1,9 +1,9 @@
 package com.musicplayer.models
 
 import android.database.Cursor
-import com.musicplayer.utils.BeatConstants.ARTIST_TYPE
-import com.musicplayer.utils.BeatConstants.FAVORITE_TYPE
-import com.musicplayer.utils.BeatConstants.FOLDER_TYPE
+import com.musicplayer.utils.Constants.ARTIST_TYPE
+import com.musicplayer.utils.Constants.FAVORITE_TYPE
+import com.musicplayer.utils.Constants.FOLDER_TYPE
 import com.musicplayer.repository.FavoritesRepositoryImplementation.Companion.COLUMN_ARTIST
 import com.musicplayer.repository.FavoritesRepositoryImplementation.Companion.COLUMN_ARTIST_ID
 import com.musicplayer.repository.FavoritesRepositoryImplementation.Companion.COLUMN_ID

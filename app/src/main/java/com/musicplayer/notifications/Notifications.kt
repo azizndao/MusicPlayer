@@ -13,11 +13,11 @@ import androidx.core.app.NotificationCompat
 import androidx.core.graphics.toColorInt
 import androidx.media.session.MediaButtonReceiver.buildMediaButtonPendingIntent
 import androidx.palette.graphics.Palette
-import com.musicplayer.utils.BeatConstants.CHANNEL_ID
-import com.musicplayer.utils.BeatConstants.NEXT
-import com.musicplayer.utils.BeatConstants.NOTIFICATION_ID
-import com.musicplayer.utils.BeatConstants.PLAY_PAUSE
-import com.musicplayer.utils.BeatConstants.PREVIOUS
+import com.musicplayer.utils.Constants.CHANNEL_ID
+import com.musicplayer.utils.Constants.NEXT
+import com.musicplayer.utils.Constants.NOTIFICATION_ID
+import com.musicplayer.utils.Constants.PLAY_PAUSE
+import com.musicplayer.utils.Constants.PREVIOUS
 import com.musicplayer.utils.GeneralUtils.isOreo
 import com.musicplayer.R
 import com.musicplayer.extensions.isPlaying

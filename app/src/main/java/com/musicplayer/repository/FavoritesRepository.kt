@@ -8,8 +8,8 @@ import com.musicplayer.extensions.optimizeReadOnlyList
 import com.musicplayer.extensions.toList
 import com.musicplayer.models.Favorite
 import com.musicplayer.models.Song
-import com.musicplayer.utils.BeatConstants.FAVORITE_ID
-import com.musicplayer.utils.BeatConstants.FAVORITE_TYPE
+import com.musicplayer.utils.Constants.FAVORITE_ID
+import com.musicplayer.utils.Constants.FAVORITE_TYPE
 
 interface FavoritesRepository {
     fun createFavorite(favorite: Favorite): Int

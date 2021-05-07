@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="song"
+      type="com.musicplayer.models.Song" />
+  </data>
+
+  <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginBottom="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/album_art"
+        albumArtFromId="@{song.albumId}"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="12dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="?shapeAppearanceSmallComponent"
+        tools:src="@tools:sample/avatars" />
+
+      <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@{song.title}"
+        android:textAppearance="?textAppearanceBody1"
+        app:layout_constraintBottom_toTopOf="@id/artist"
+        app:layout_constraintEnd_toStartOf="@id/duration"
+        app:layout_constraintStart_toEndOf="@id/album_art"
+        app:layout_constraintTop_toTopOf="@id/album_art"
+        tools:text="@tools:sample/lorem" />
+
+      <TextView
+        android:id="@+id/artist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@{song.album}"
+        android:textAppearance="?textAppearanceBody2"
+        app:layout_constraintBottom_toBottomOf="@id/album_art"
+        app:layout_constraintEnd_toEndOf="@id/title"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="@tools:sample/full_names" />
+
+      <TextView
+        android:id="@+id/duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:textAppearance="?textAppearanceCaption"
+        app:layout_constraintBottom_toBottomOf="@id/artist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/title"
+        app:layout_constraintTop_toTopOf="@id/title"
+        tools:text="@tools:sample/date/ddmmyy" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </com.google.android.material.card.MaterialCardView>
+</layout>
