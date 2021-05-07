@@ -14,13 +14,26 @@
       android:id="@+id/action_homeFragment_to_albumDetailsFragment"
       app:destination="@id/albumDetailsFragment" />
   </fragment>
+
   <fragment
     android:id="@+id/albumDetailsFragment"
     android:name="com.musicplayer.ui.fragments.AlbumDetailsFragment"
     android:label="AlbumDetailsFragment"
-    tools:layout="@layout/fragment_album_details" >
+    tools:layout="@layout/fragment_album_details">
     <argument
       android:name="albumId"
       app:argType="long" />
   </fragment>
+  <dialog
+    android:id="@+id/albumMenuDialogFragment"
+    android:name="com.musicplayer.ui.bottomsheet.AlbumMenuDialogFragment"
+    android:label="AlbumMenuDialogFragment"
+    tools:layout="@layout/fragment_album_menu_dialog" >
+    <argument
+      android:name="albumId"
+      app:argType="long" />
+  </dialog>
+  <action
+    android:id="@+id/action_global_albumMenuDialogFragment"
+    app:destination="@id/albumMenuDialogFragment" />
 </navigation>

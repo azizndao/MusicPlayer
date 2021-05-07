@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
   <data>
 
@@ -8,16 +9,12 @@
       name="album"
       type="com.musicplayer.models.Album" />
 
-    <variable
-      name="onClick"
-      type="android.view.View.OnClickListener" />
   </data>
 
   <com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/album_item_margin"
-    android:onClick="@{onClick}">
+    android:layout_margin="@dimen/album_item_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
@@ -34,7 +31,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearance="?shapeAppearanceMediumComponent" />
+        app:shapeAppearance="?shapeAppearanceMediumComponent"
+        tools:src="@tools:sample/avatars" />
+
+      <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_play"
+        style="?toolbarNavigationButtonStyle"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/bg_play_circle"
+        android:scaleType="centerCrop"
+        android:tint="?colorSurface"
+        app:contentPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/album_art"
+        app:layout_constraintEnd_toEndOf="@id/album_art"
+        app:srcCompat="@drawable/ic_play" />
 
       <TextView
         android:id="@+id/title"
@@ -46,37 +59,48 @@
         android:maxLines="1"
         android:text="@{album.title}"
         android:textAppearance="?textAppearanceBody2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_more"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/album_art" />
+        app:layout_constraintTop_toBottomOf="@id/album_art"
+        tools:text="@tools:sample/lorem" />
 
       <TextView
         android:id="@+id/artist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@{album.artist}"
         android:textAppearance="?textAppearanceBody2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintEnd_toEndOf="@id/title"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="@tools:sample/full_names" />
 
       <TextView
         android:id="@+id/song_count"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4dp"
         android:layout_marginBottom="4dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@{@string/numberOfSongs(album.songCount)}"
         android:textAppearance="?textAppearanceCaption"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/title"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/artist"
+        tools:text="21 songs" />
+
+      <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_more"
+        style="?toolbarNavigationButtonStyle"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="@id/song_count"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/artist" />
+        app:layout_constraintTop_toTopOf="@id/title"
+        app:srcCompat="@drawable/ic_more_vert" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context=".ui.bottomsheet.AlbumMenuDialogFragment">
+
+  <data>
+
+    <variable
+      name="album"
+      type="com.musicplayer.models.Album" />
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="?colorSurface">
+
+    <com.google.android.material.imageview.ShapeableImageView
+      android:id="@+id/album_art"
+      albumArtFromId="@{album.id}"
+      android:layout_width="56dp"
+      android:layout_height="56dp"
+      android:layout_margin="16dp"
+      app:layout_constraintBottom_toTopOf="@id/menu"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0"
+      app:layout_constraintVertical_chainStyle="packed"
+      app:shapeAppearance="?shapeAppearanceSmallComponent"
+      tools:src="@tools:sample/avatars" />
+
+    <TextView
+      android:id="@+id/title"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:text="@{album.title}"
+      android:textAppearance="?textAppearanceBody1"
+      app:layout_constraintBottom_toTopOf="@id/artist"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@id/album_art"
+      app:layout_constraintTop_toTopOf="@id/album_art"
+      app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+      android:id="@+id/artist"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:text="@{album.artist}"
+      android:textAppearance="?textAppearanceBody2"
+      app:layout_constraintBottom_toBottomOf="@id/album_art"
+      app:layout_constraintEnd_toEndOf="@id/title"
+      app:layout_constraintStart_toStartOf="@id/title"
+      app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <com.google.android.material.navigation.NavigationView
+      android:id="@+id/menu"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      app:elevation="0dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/album_art"
+      app:menu="@menu/menu_album_bottom_sheet" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

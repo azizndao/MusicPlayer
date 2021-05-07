@@ -19,4 +19,10 @@
   <string name="numberOfSongs">%s songs</string>
   <string name="play_all">Play all</string>
   <string name="random">Randomly</string>
+  <string name="album_cover">Album cover image</string>
+  <string name="edit_tags">Edit album tags</string>
+  <string name="add_to_playlist">Add to playlist</string>
+  <string name="shuffle_and_play">Shuffle and play all</string>
+  <string name="play_after_current_song">Play after current song</string>
+  <string name="play_after_current_playlist">Play after current playlist</string>
 </resources>

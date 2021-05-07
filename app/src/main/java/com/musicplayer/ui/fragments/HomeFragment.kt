@@ -27,6 +27,7 @@ class HomeFragment : Fragment() {
     with(binding) {
       val tabTitles = resources.getStringArray(R.array.home_tabs)
       pages.adapter = HomeViewAdapter(this@HomeFragment)
+      pages.currentItem = 1
       TabLayoutMediator(tabs, pages) { tab, position -> tab.text = tabTitles[position] }.attach()
     }
   }
