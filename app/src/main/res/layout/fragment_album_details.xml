@@ -1,45 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context=".ui.fragments.AlbumDetailsFragment">
 
   <data>
 
     <variable
       name="album"
       type="com.musicplayer.models.Album" />
+
+    <variable
+      name="onPlayAllClick"
+      type="android.view.View.OnClickListener" />
+
+    <variable
+      name="onPlayRandomlyClick"
+      type="android.view.View.OnClickListener" />
   </data>
 
-  <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:transitionGroup="true"
-    android:transitionName="album_details"
-    tools:context=".ui.fragments.AlbumDetailsFragment">
+    android:transitionName="album_details">
 
     <com.google.android.material.appbar.AppBarLayout
       android:id="@+id/app_bar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:backgroundTint="?colorSurface"
       app:liftOnScroll="true">
 
-      <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+      <com.google.android.material.appbar.CollapsingToolbarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_scrollFlags="scroll"
-        app:showBackButton="@{true}"
-        app:title="@{album.title}"
-        tools:navigationIcon="@drawable/ic_arrow_back"
-        tools:title="@string/albums" />
+        app:contentScrim="?colorSurface"
+        app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed"
+        app:statusBarScrim="?colorSurface">
+
+        <include
+          layout="@layout/item_album_description"
+          app:album="@{album}" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="?actionBarSize"
+          android:backgroundTint="@android:color/transparent"
+          app:layout_collapseMode="pin"
+          app:showBackButton="@{true}"
+          app:menu="@menu/menu_album_details"
+          tools:navigationIcon="@drawable/ic_arrow_back" />
+      </com.google.android.material.appbar.CollapsingToolbarLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/elements"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior"
-      tools:itemCount="15"
-      tools:listitem="@layout/item_song" />
+    <include
+      android:id="@+id/songs"
+      layout="@layout/fragment_song_list" />
   </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

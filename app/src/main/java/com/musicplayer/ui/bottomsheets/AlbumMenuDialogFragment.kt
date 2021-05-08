@@ -1,14 +1,11 @@
-package com.musicplayer.ui.bottomsheet
+package com.musicplayer.ui.bottomsheets
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.musicplayer.R
-import com.musicplayer.databinding.FragmentAlbumDetailsBinding
 import com.musicplayer.databinding.FragmentAlbumMenuDialogBinding
 import com.musicplayer.ui.viewmodels.AlbumViewModel
 import org.koin.android.ext.android.inject

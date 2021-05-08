@@ -2,15 +2,17 @@ package com.musicplayer.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.musicplayer.R
 import com.musicplayer.databinding.FragmentHomeBinding
 import com.musicplayer.ui.adapters.HomeViewAdapter
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
 
   private lateinit var binding: FragmentHomeBinding
 
@@ -24,11 +26,23 @@ class HomeFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    val tabTitles = resources.getStringArray(R.array.home_tabs)
     with(binding) {
-      val tabTitles = resources.getStringArray(R.array.home_tabs)
+      toolbar.setOnMenuItemClickListener(this@HomeFragment)
       pages.adapter = HomeViewAdapter(this@HomeFragment)
       pages.currentItem = 1
       TabLayoutMediator(tabs, pages) { tab, position -> tab.text = tabTitles[position] }.attach()
     }
+  }
+
+  override fun onMenuItemClick(item: MenuItem): Boolean {
+    when (item.itemId) {
+      R.id.action_search -> findNavController().navigate(SearchFragmentDirections.actionGlobalSearchFragment())
+      R.id.action_sort -> {
+      }
+      R.id.action_more_menu -> {
+      }
+    }
+    return true
   }
 }

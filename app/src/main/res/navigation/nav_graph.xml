@@ -26,9 +26,9 @@
   </fragment>
   <dialog
     android:id="@+id/albumMenuDialogFragment"
-    android:name="com.musicplayer.ui.bottomsheet.AlbumMenuDialogFragment"
+    android:name="com.musicplayer.ui.bottomsheets.AlbumMenuDialogFragment"
     android:label="AlbumMenuDialogFragment"
-    tools:layout="@layout/fragment_album_menu_dialog" >
+    tools:layout="@layout/fragment_album_menu_dialog">
     <argument
       android:name="albumId"
       app:argType="long" />
@@ -36,4 +36,12 @@
   <action
     android:id="@+id/action_global_albumMenuDialogFragment"
     app:destination="@id/albumMenuDialogFragment" />
+  <fragment
+    android:id="@+id/searchFragment"
+    android:name="com.musicplayer.ui.fragments.SearchFragment"
+    android:label="SearchFragment"
+    tools:layout="@layout/fragment_search" />
+  <action
+    android:id="@+id/action_global_searchFragment"
+    app:destination="@id/searchFragment" />
 </navigation>

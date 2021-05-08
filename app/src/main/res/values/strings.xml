@@ -25,4 +25,7 @@
   <string name="shuffle_and_play">Shuffle and play all</string>
   <string name="play_after_current_song">Play after current song</string>
   <string name="play_after_current_playlist">Play after current playlist</string>
+  <string name="more_menu">More menu</string>
+  <string name="search">Search something</string>
+  <string name="sort">Sort</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.musicplayer.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,11 +11,11 @@ import com.musicplayer.models.Album
 
 
 interface AlbumListListener {
-  fun onAlbumClick(album: Album)
+  fun onAlbumClick(view: View, album: Album)
 
   fun onAlbumPlayClick(album: Album)
 
-  fun onAlbumLongClick(album: Album)
+  fun onAlbumLongClick(view: View, album: Album)
 
   fun onAlbumMenuClick(album: Album)
 }
@@ -40,8 +41,9 @@ class AlbumViewHolder(
     with(binding) {
       album = data
       root.also {
-        it.setOnClickListener { listener.onAlbumClick(data) }
-        it.setOnLongClickListener { listener.onAlbumLongClick(data); true }
+        it.transitionName = data.title
+        it.setOnClickListener { view -> listener.onAlbumClick(view, data) }
+        it.setOnLongClickListener { view -> listener.onAlbumLongClick(view, data); true }
       }
       btnPlay.setOnClickListener { listener.onAlbumPlayClick(data) }
       btnMore.setOnClickListener { listener.onAlbumMenuClick(data) }

@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import com.musicplayer.databinding.FragmentAlbumListBinding
 import com.musicplayer.extensions.observeOnce
@@ -43,11 +46,13 @@ class AlbumListFragment : Fragment(), AlbumListListener {
     }
   }
 
-  override fun onAlbumClick(album: Album) {
+  override fun onAlbumClick(view: View, album: Album) {
+    val extras = FragmentNavigatorExtras(view to "album_details")
     findNavController().navigate(
       HomeFragmentDirections.actionHomeFragmentToAlbumDetailsFragment(
         album.id
-      )
+      ),
+      extras
     )
   }
 
@@ -58,7 +63,7 @@ class AlbumListFragment : Fragment(), AlbumListListener {
     }
   }
 
-  override fun onAlbumLongClick(album: Album) {
+  override fun onAlbumLongClick(view: View, album: Album) {
 
   }
 
