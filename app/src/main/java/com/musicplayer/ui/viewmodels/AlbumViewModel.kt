@@ -11,36 +11,36 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.withContext
 
 class AlbumViewModel(
-    private val repository: AlbumsRepository
+  private val repository: AlbumsRepository
 ) : CoroutineViewModel(Main) {
-    private val albumData = MutableLiveData<List<Album>>()
-    private val songsByAlbum = MutableLiveData<List<Song>>()
+  private val albumData = MutableLiveData<List<Album>>()
+  private val songsByAlbum = MutableLiveData<List<Song>>()
 
-    fun getAlbum(id: Long): Album {
-        return repository.getAlbum(id)
-    }
+  fun getAlbum(id: Long): Album {
+    return repository.getAlbum(id)
+  }
 
-    fun getAlbums(): LiveData<List<Album>> {
-        update()
-        return albumData
-    }
+  fun getAlbums(): LiveData<List<Album>> {
+    update()
+    return albumData
+  }
 
-    fun getSongsByAlbum(id: Long): LiveData<List<Song>> {
-        launch {
-            val list = withContext(IO) {
-                repository.getSongsForAlbum(id)
-            }
-            songsByAlbum.postValue(list)
-        }
-        return songsByAlbum
+  fun getSongsByAlbum(id: Long): LiveData<List<Song>> {
+    launch {
+      val list = withContext(IO) {
+        repository.getSongsForAlbum(id)
+      }
+      songsByAlbum.postValue(list)
     }
+    return songsByAlbum
+  }
 
-    fun update() {
-        launch {
-            val albums = withContext(IO) {
-                repository.getAlbums()
-            }
-            albumData.postValue(albums)
-        }
+  fun update() {
+    launch {
+      val albums = withContext(IO) {
+        repository.getAlbums()
+      }
+      albumData.postValue(albums)
     }
+  }
 }

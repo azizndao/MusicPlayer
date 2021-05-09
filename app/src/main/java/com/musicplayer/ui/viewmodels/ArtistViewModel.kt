@@ -11,37 +11,37 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.withContext
 
 class ArtistViewModel(
-    private val repository: ArtistsRepository
+  private val repository: ArtistsRepository
 ) : CoroutineViewModel(Main) {
 
-    private val artistsData: MutableLiveData<List<Artist>> = MutableLiveData()
-    private val albumLiveData = MutableLiveData<List<Album>>()
+  private val artistsData: MutableLiveData<List<Artist>> = MutableLiveData()
+  private val albumLiveData = MutableLiveData<List<Album>>()
 
-    fun update() {
-        launch {
-            val artists = withContext(IO){
-                repository.getAllArtist()
-            }
-            artistsData.postValue(artists)
-        }
+  fun update() {
+    launch {
+      val artists = withContext(IO) {
+        repository.getAllArtist()
+      }
+      artistsData.postValue(artists)
     }
+  }
 
-    fun getArtists(): LiveData<List<Artist>> {
-        update()
-        return artistsData
-    }
+  fun getArtists(): LiveData<List<Artist>> {
+    update()
+    return artistsData
+  }
 
-    fun getArtistAlbums(artistId: Long): LiveData<List<Album>> {
-        launch {
-            val albums = withContext(IO) {
-                repository.getAlbumsForArtist(artistId)
-            }
-            albumLiveData.postValue(albums)
-        }
-        return albumLiveData
+  fun getArtistAlbums(artistId: Long): LiveData<List<Album>> {
+    launch {
+      val albums = withContext(IO) {
+        repository.getAlbumsForArtist(artistId)
+      }
+      albumLiveData.postValue(albums)
     }
+    return albumLiveData
+  }
 
-    fun getArtist(id: Long): Artist {
-        return repository.getArtist(id)
-    }
+  fun getArtist(id: Long): Artist {
+    return repository.getArtist(id)
+  }
 }

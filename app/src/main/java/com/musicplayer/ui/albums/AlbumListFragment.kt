@@ -1,28 +1,27 @@
-package com.musicplayer.ui.fragments
+package com.musicplayer.ui.albums
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
+import com.musicplayer.R
 import com.musicplayer.databinding.FragmentAlbumListBinding
 import com.musicplayer.extensions.observeOnce
 import com.musicplayer.extensions.toIDList
 import com.musicplayer.models.Album
-import com.musicplayer.ui.adapters.AlbumListAdapter
-import com.musicplayer.ui.adapters.AlbumListListener
+import com.musicplayer.ui.albumdetails.AlbumDetailsFragmentDirections
+import com.musicplayer.ui.home.HomeFragmentDirections
 import com.musicplayer.ui.viewmodels.AlbumViewModel
 import com.musicplayer.ui.viewmodels.MainViewModel
 import com.musicplayer.utils.Constants
 import com.musicplayer.utils.GeneralUtils
 import org.koin.android.ext.android.inject
 
-class AlbumListFragment : Fragment(), AlbumListListener {
+class AlbumListFragment : Fragment(), AlbumListAdapter.Listener {
 
   private val albumViewModel by inject<AlbumViewModel>()
   private val mainViewModel by inject<MainViewModel>()
@@ -39,7 +38,9 @@ class AlbumListFragment : Fragment(), AlbumListListener {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     with(binding) {
-      albums.layoutManager = GridLayoutManager(requireContext(), 2)
+      val orientation = GeneralUtils.getOrientation(requireContext())
+      val spanCount = if (orientation == GeneralUtils.PORTRAIT) 2 else 4
+      albums.layoutManager = GridLayoutManager(requireContext(), spanCount)
       albums.adapter = AlbumListAdapter(this@AlbumListFragment).also { adapter ->
         albumViewModel.getAlbums().observe(viewLifecycleOwner) { data -> adapter.submitList(data) }
       }
@@ -47,13 +48,9 @@ class AlbumListFragment : Fragment(), AlbumListListener {
   }
 
   override fun onAlbumClick(view: View, album: Album) {
-    val extras = FragmentNavigatorExtras(view to "album_details")
-    findNavController().navigate(
-      HomeFragmentDirections.actionHomeFragmentToAlbumDetailsFragment(
-        album.id
-      ),
-      extras
-    )
+    val extras = FragmentNavigatorExtras(view to getString(R.string.album_detail_transition_name))
+    val directions = HomeFragmentDirections.actionHomeFragmentToAlbumDetailsFragment(album.id)
+    findNavController().navigate(directions, extras)
   }
 
   override fun onAlbumPlayClick(album: Album) {
@@ -68,10 +65,7 @@ class AlbumListFragment : Fragment(), AlbumListListener {
   }
 
   override fun onAlbumMenuClick(album: Album) {
-    findNavController().navigate(
-      AlbumDetailsFragmentDirections.actionGlobalAlbumMenuDialogFragment(
-        album.id
-      )
-    )
+    val directions = AlbumDetailsFragmentDirections.actionGlobalAlbumMenuDialogFragment(album.id)
+    findNavController().navigate(directions)
   }
 }

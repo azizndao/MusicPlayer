@@ -10,40 +10,40 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.withContext
 
 class SongViewModel(
-    private val songsRepository: SongsRepository
+  private val songsRepository: SongsRepository
 ) : CoroutineViewModel(Main) {
 
-    private val songsData = MutableLiveData<List<Song>>().apply { value = mutableListOf() }
-    private val songsSelected =
-        MutableLiveData<MutableList<Song>>().apply { value = mutableListOf() }
+  private val songsData = MutableLiveData<List<Song>>().apply { value = mutableListOf() }
+  private val songsSelected =
+    MutableLiveData<MutableList<Song>>().apply { value = mutableListOf() }
 
-    fun update() {
-        launch {
-            val songs = withContext(IO) {
-                songsRepository.loadSongs()
-            }
-            if (songs.isNotEmpty()) songsData.postValue(songs)
-        }
+  fun update() {
+    launch {
+      val songs = withContext(IO) {
+        songsRepository.loadSongs()
+      }
+      if (songs.isNotEmpty()) songsData.postValue(songs)
     }
+  }
 
-    fun update(song: MutableList<Song>) {
-        songsSelected.postValue(song)
-    }
+  fun update(song: MutableList<Song>) {
+    songsSelected.postValue(song)
+  }
 
-    fun getSongList(): LiveData<List<Song>> {
-        update()
-        return songsData
-    }
+  fun getSongList(): LiveData<List<Song>> {
+    update()
+    return songsData
+  }
 
-    fun selectedSongs(): LiveData<MutableList<Song>> {
-        return songsSelected
-    }
+  fun selectedSongs(): LiveData<MutableList<Song>> {
+    return songsSelected
+  }
 
-    fun delete(ids: LongArray): Int {
-        return songsRepository.deleteTracks(ids)
-    }
+  fun delete(ids: LongArray): Int {
+    return songsRepository.deleteTracks(ids)
+  }
 
-    fun getSongById(id: Long): Song {
-        return songsRepository.getSongForId(id)
-    }
+  fun getSongById(id: Long): Song {
+    return songsRepository.getSongForId(id)
+  }
 }

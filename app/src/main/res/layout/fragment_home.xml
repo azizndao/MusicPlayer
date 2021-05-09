@@ -2,9 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  tools:context=".ui.fragments.HomeFragment">
+  tools:context=".ui.home.HomeFragment">
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
+    marginLeftSystemWindowInsets="@{true}"
+    marginRightSystemWindowInsets="@{true}"
+    marginTopSystemWindowInsets="@{true}"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:transitionGroup="true">
@@ -13,14 +16,15 @@
       android:id="@+id/app_bar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:background="@android:color/transparent"
       app:liftOnScroll="true">
 
       <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        app:menu="@menu/menu_home"
         android:layout_height="wrap_content"
         app:layout_scrollFlags="scroll"
+        app:menu="@menu/menu_home"
         app:title="@string/app_name" />
 
       <com.google.android.material.tabs.TabLayout
@@ -35,19 +39,6 @@
       android:layout_height="match_parent"
       app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <com.google.android.material.card.MaterialCardView
-      android:id="@+id/bottom_sheet"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      app:behavior_peekHeight="?actionBarSize"
-      app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-      <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-      </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
   </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

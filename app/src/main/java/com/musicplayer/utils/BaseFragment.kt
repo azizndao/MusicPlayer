@@ -1,8 +1,8 @@
-package com.musicplayer.ui.fragments
+package com.musicplayer.utils
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.google.android.material.transition.platform.MaterialElevationScale
+import com.google.android.material.transition.MaterialElevationScale
 
 abstract class BaseFragment : Fragment() {
 

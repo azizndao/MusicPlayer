@@ -3,5 +3,8 @@
   <declare-styleable name="others">
     <attr name="songCardElevation" format="dimension" />
     <attr name="albumCardElevation" format="dimension" />
+    <attr name="cornerSizeLargeComponent" format="dimension" />
+    <attr name="cornerSizeMediumComponent" format="dimension" />
+    <attr name="cornerSizeSmallComponent" format="dimension" />
   </declare-styleable>
 </resources>

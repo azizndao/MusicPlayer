@@ -8,8 +8,8 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val mainModel = module {
-    single {
-        val component = ComponentName(get(), BeatPlayerService::class.java)
-        PlaybackConnectionImplementation(get(), component)
-    } bind PlaybackConnection::class
+  single {
+    val component = ComponentName(get(), BeatPlayerService::class.java)
+    PlaybackConnectionImplementation(get(), component)
+  } bind PlaybackConnection::class
 }

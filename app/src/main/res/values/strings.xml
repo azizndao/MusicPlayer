@@ -28,4 +28,6 @@
   <string name="more_menu">More menu</string>
   <string name="search">Search something</string>
   <string name="sort">Sort</string>
+  <string name="album_detail_transition_name">album_detail_transition_name</string>
+  <string name="album_transition_name">album_transition_name-%d</string>
 </resources>

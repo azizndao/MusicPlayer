@@ -1,7 +1,7 @@
 package com.musicplayer
 
 import android.app.Application
-import com.crrl.beatplayer.ui.viewmodels.viewModelModule
+import com.musicplayer.ui.viewmodels.viewModelModule
 import com.musicplayer.utils.utilsModule
 import com.musicplayer.notifications.notificationModule
 import com.musicplayer.playback.playbackModule
@@ -13,22 +13,22 @@ import org.koin.core.context.startKoin
 
 class App : Application() {
 
-    override fun onCreate() {
-        super.onCreate()
+  override fun onCreate() {
+    super.onCreate()
 
-        TagOptionSingleton.getInstance().isAndroid = true
+    TagOptionSingleton.getInstance().isAndroid = true
 
-        val modules = listOf(
-            mainModel,
-            notificationModule,
-            playbackModule,
-            repositoriesModule,
-            viewModelModule,
-            utilsModule
-        )
-        startKoin {
-            androidContext(this@App)
-            modules(modules)
-        }
+    val modules = listOf(
+      mainModel,
+      notificationModule,
+      playbackModule,
+      repositoriesModule,
+      viewModelModule,
+      utilsModule
+    )
+    startKoin {
+      androidContext(this@App)
+      modules(modules)
     }
+  }
 }

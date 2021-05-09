@@ -1,4 +1,4 @@
-package com.musicplayer.ui.fragments
+package com.musicplayer.ui.songs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,16 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.musicplayer.databinding.FragmentSongListBinding
 import com.musicplayer.models.Song
-import com.musicplayer.ui.adapters.SongListAdapter
-import com.musicplayer.ui.adapters.SongListListener
-import com.musicplayer.ui.viewmodels.MainViewModel
 import com.musicplayer.ui.viewmodels.SongViewModel
 import org.koin.android.ext.android.inject
 
-class SongListFragment : Fragment(), SongListListener {
+class SongListFragment : Fragment(), SongListAdapter.Listener {
 
   private lateinit var binding: FragmentSongListBinding
-  private val mainViewModel by inject<MainViewModel>()
   private val songViewModel by inject<SongViewModel>()
 
   override fun onCreateView(

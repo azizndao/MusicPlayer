@@ -1,6 +1,7 @@
 <resources>
-  <style name="Theme.MusicPlayer" parent="BaseTheme">
-    <item name="songCardElevation">2dp</item>
-    <item name="albumCardElevation">2dp</item>
+  <style name="Theme.App" parent="BaseTheme">
+    <item name="songCardElevation">1dp</item>
+    <item name="albumCardElevation">1dp</item>
+    <item name="android:navigationBarColor">@color/surface980</item>
   </style>
 </resources>

@@ -18,32 +18,32 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 
 fun MediaSessionCompat.position(): Long {
-    return controller.playbackState.position
+  return controller.playbackState.position
 }
 
 fun MediaSessionCompat.isPlaying(): Boolean {
-    return controller.playbackState.state == PlaybackStateCompat.STATE_PLAYING
+  return controller.playbackState.state == PlaybackStateCompat.STATE_PLAYING
 }
 
 inline val MediaSessionCompat.repeatMode
-    get() = controller.repeatMode
+  get() = controller.repeatMode
 
 inline val MediaSessionCompat.shuffleMode
-    get() = controller.shuffleMode
+  get() = controller.shuffleMode
 
 inline val PlaybackStateCompat.isPrepared
-    get() = (state == PlaybackStateCompat.STATE_BUFFERING) ||
-            (state == PlaybackStateCompat.STATE_PLAYING) ||
-            (state == PlaybackStateCompat.STATE_PAUSED)
+  get() = (state == PlaybackStateCompat.STATE_BUFFERING) ||
+      (state == PlaybackStateCompat.STATE_PLAYING) ||
+      (state == PlaybackStateCompat.STATE_PAUSED)
 
 inline val PlaybackStateCompat.isPlaying
-    get() = (state == PlaybackStateCompat.STATE_BUFFERING) ||
-            (state == PlaybackStateCompat.STATE_PLAYING)
+  get() = (state == PlaybackStateCompat.STATE_BUFFERING) ||
+      (state == PlaybackStateCompat.STATE_PLAYING)
 
 inline val PlaybackStateCompat.isPlayEnabled
-    get() = (actions and PlaybackStateCompat.ACTION_PLAY != 0L) ||
-            ((actions and PlaybackStateCompat.ACTION_PLAY_PAUSE != 0L) &&
-                    (state == PlaybackStateCompat.STATE_PAUSED))
+  get() = (actions and PlaybackStateCompat.ACTION_PLAY != 0L) ||
+      ((actions and PlaybackStateCompat.ACTION_PLAY_PAUSE != 0L) &&
+          (state == PlaybackStateCompat.STATE_PAUSED))
 
 inline val MediaMetadataCompat.id: String get() = getString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID)
 

@@ -25,39 +25,39 @@ class SettingsViewModel(
   private val settingsUtility: SettingsUtility,
 ) : CoroutineViewModel(Main) {
 
-    private val isExtraInfoLiveData = MutableLiveData<Boolean>()
-    val isExtraInfo: LiveData<Boolean>
-        get() {
-            launch {
-                val isEnable = withContext(IO) {
-                    settingsUtility.isExtraInfo
-                }
-                isExtraInfoLiveData.postValue(isEnable)
-            }
-            return isExtraInfoLiveData
+  private val isExtraInfoLiveData = MutableLiveData<Boolean>()
+  val isExtraInfo: LiveData<Boolean>
+    get() {
+      launch {
+        val isEnable = withContext(IO) {
+          settingsUtility.isExtraInfo
         }
+        isExtraInfoLiveData.postValue(isEnable)
+      }
+      return isExtraInfoLiveData
+    }
 
-    private val isExtraActionsLiveData = MutableLiveData<Boolean>()
-    val isExtraActions: LiveData<Boolean>
-        get() {
-            launch {
-                val isEnable = withContext(IO) {
-                    settingsUtility.isExtraAction
-                }
-                isExtraActionsLiveData.postValue(isEnable)
-            }
-            return isExtraActionsLiveData
+  private val isExtraActionsLiveData = MutableLiveData<Boolean>()
+  val isExtraActions: LiveData<Boolean>
+    get() {
+      launch {
+        val isEnable = withContext(IO) {
+          settingsUtility.isExtraAction
         }
+        isExtraActionsLiveData.postValue(isEnable)
+      }
+      return isExtraActionsLiveData
+    }
 
-    private val forwardRewindTimeData = MutableLiveData<Int>()
-    val forwardRewindTime: LiveData<Int>
-        get() {
-            launch {
-                val time = withContext(IO) {
-                    settingsUtility.forwardRewindTime
-                }
-                forwardRewindTimeData.postValue(time)
-            }
-            return forwardRewindTimeData
+  private val forwardRewindTimeData = MutableLiveData<Int>()
+  val forwardRewindTime: LiveData<Int>
+    get() {
+      launch {
+        val time = withContext(IO) {
+          settingsUtility.forwardRewindTime
         }
+        forwardRewindTimeData.postValue(time)
+      }
+      return forwardRewindTimeData
+    }
 }

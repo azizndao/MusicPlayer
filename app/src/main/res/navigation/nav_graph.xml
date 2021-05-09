@@ -7,7 +7,7 @@
 
   <fragment
     android:id="@+id/homeFragment"
-    android:name="com.musicplayer.ui.fragments.HomeFragment"
+    android:name="com.musicplayer.ui.home.HomeFragment"
     android:label="HomeFragment"
     tools:layout="@layout/fragment_home">
     <action
@@ -17,7 +17,7 @@
 
   <fragment
     android:id="@+id/albumDetailsFragment"
-    android:name="com.musicplayer.ui.fragments.AlbumDetailsFragment"
+    android:name="com.musicplayer.ui.albumdetails.AlbumDetailsFragment"
     android:label="AlbumDetailsFragment"
     tools:layout="@layout/fragment_album_details">
     <argument
@@ -26,7 +26,7 @@
   </fragment>
   <dialog
     android:id="@+id/albumMenuDialogFragment"
-    android:name="com.musicplayer.ui.bottomsheets.AlbumMenuDialogFragment"
+    android:name="com.musicplayer.ui.dialogs.AlbumMenuDialogFragment"
     android:label="AlbumMenuDialogFragment"
     tools:layout="@layout/fragment_album_menu_dialog">
     <argument
@@ -38,7 +38,7 @@
     app:destination="@id/albumMenuDialogFragment" />
   <fragment
     android:id="@+id/searchFragment"
-    android:name="com.musicplayer.ui.fragments.SearchFragment"
+    android:name="com.musicplayer.ui.search.SearchFragment"
     android:label="SearchFragment"
     tools:layout="@layout/fragment_search" />
   <action

@@ -20,9 +20,10 @@
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
+    paddingTopSystemWindowInsets="@{true}"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="?actionBarSize"
+    android:paddingTop="?actionBarSize"
     app:layout_collapseMode="parallax">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -82,7 +83,7 @@
       tools:text="@tools:sample/date/ddmmyy" />
 
     <com.google.android.material.button.MaterialButton
-      android:id="@+id/play_all"
+      android:id="@+id/btn_play_all"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginVertical="8dp"
@@ -92,14 +93,14 @@
       android:text="@string/play_all"
       app:icon="@drawable/ic_play"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toStartOf="@+id/play_randomly"
+      app:layout_constraintEnd_toStartOf="@+id/btn_play_randomly"
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="@id/album_art"
       app:layout_constraintTop_toBottomOf="@id/album_art"
       app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.button.MaterialButton
-      android:id="@+id/play_randomly"
+      android:id="@+id/btn_play_randomly"
       style="?materialButtonOutlinedStyle"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -109,11 +110,11 @@
       android:onClick="@{onPlayRandomlyClick}"
       android:text="@string/random"
       app:icon="@drawable/ic_play"
-      app:layout_constraintBottom_toBottomOf="@id/play_all"
+      app:layout_constraintBottom_toBottomOf="@id/btn_play_all"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
-      app:layout_constraintStart_toEndOf="@+id/play_all"
-      app:layout_constraintTop_toTopOf="@id/play_all"
+      app:layout_constraintStart_toEndOf="@+id/btn_play_all"
+      app:layout_constraintTop_toTopOf="@id/btn_play_all"
       app:layout_constraintVertical_bias="0.0" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

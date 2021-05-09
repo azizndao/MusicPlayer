@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  tools:context=".ui.bottomsheets.AlbumMenuDialogFragment">
+  tools:context=".ui.dialogs.AlbumMenuDialogFragment">
 
   <data>
 
@@ -13,8 +13,28 @@
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:backgroundTint="?colorSurface">
+
+    <FrameLayout
+      android:id="@+id/header_bg"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:background="?colorPrimarySurface"
+      app:layout_constraintBottom_toTopOf="@id/options"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/btn_close"
+      style="?toolbarNavigationButtonStyle"
+      android:layout_width="38dp"
+      android:layout_height="38dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_close"
+      app:tint="?colorOnPrimarySurface" />
 
     <com.google.android.material.imageview.ShapeableImageView
       android:id="@+id/album_art"
@@ -22,9 +42,10 @@
       android:layout_width="56dp"
       android:layout_height="56dp"
       android:layout_margin="16dp"
-      app:layout_constraintBottom_toTopOf="@id/menu"
+      android:scaleType="centerCrop"
+      app:layout_constraintBottom_toTopOf="@id/options"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/btn_close"
       app:layout_constraintVertical_bias="0"
       app:layout_constraintVertical_chainStyle="packed"
       app:shapeAppearance="?shapeAppearanceSmallComponent"
@@ -40,11 +61,13 @@
       android:maxLines="1"
       android:text="@{album.title}"
       android:textAppearance="?textAppearanceBody1"
+      android:textColor="?colorOnPrimarySurface"
       app:layout_constraintBottom_toTopOf="@id/artist"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@id/album_art"
       app:layout_constraintTop_toTopOf="@id/album_art"
-      app:layout_constraintVertical_chainStyle="packed" />
+      app:layout_constraintVertical_chainStyle="packed"
+      tools:text="@tools:sample/lorem" />
 
     <TextView
       android:id="@+id/artist"
@@ -54,14 +77,16 @@
       android:maxLines="1"
       android:text="@{album.artist}"
       android:textAppearance="?textAppearanceBody2"
+      android:textColor="?colorOnPrimarySurface"
       app:layout_constraintBottom_toBottomOf="@id/album_art"
       app:layout_constraintEnd_toEndOf="@id/title"
       app:layout_constraintStart_toStartOf="@id/title"
-      app:layout_constraintTop_toBottomOf="@id/title" />
+      app:layout_constraintTop_toBottomOf="@id/title"
+      tools:text="@tools:sample/full_names" />
 
     <com.google.android.material.navigation.NavigationView
-      android:id="@+id/menu"
-      android:layout_width="0dp"
+      android:id="@+id/options"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       app:elevation="0dp"
       app:layout_constraintBottom_toBottomOf="parent"

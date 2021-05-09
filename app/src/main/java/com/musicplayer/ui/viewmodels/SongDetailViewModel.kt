@@ -37,122 +37,122 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SongDetailViewModel(
-    private val favoritesRepository: FavoritesRepository,
-    mediaPlaybackConnection: PlaybackConnection,
-    private val context: Context
+  private val favoritesRepository: FavoritesRepository,
+  mediaPlaybackConnection: PlaybackConnection,
+  private val context: Context
 ) : CoroutineViewModel(Main) {
 
-    private var state = BIND_STATE_CANCELED
+  private var state = BIND_STATE_CANCELED
 
-    private val currentDataBase = MutableLiveData<MediaItemData>()
-    val currentData: LiveData<MediaItemData> = currentDataBase
+  private val currentDataBase = MutableLiveData<MediaItemData>()
+  val currentData: LiveData<MediaItemData> = currentDataBase
 
-    private val currentStateBase = MutableLiveData<PlaybackState>()
-    val currentState: LiveData<PlaybackState> = currentStateBase
+  private val currentStateBase = MutableLiveData<PlaybackState>()
+  val currentState: LiveData<PlaybackState> = currentStateBase
 
-    private val queueDataBase = MutableLiveData<Queue>()
-    val queueData: LiveData<Queue> = queueDataBase
+  private val queueDataBase = MutableLiveData<Queue>()
+  val queueData: LiveData<Queue> = queueDataBase
 
-    private val timeLiveData = MutableLiveData<Int>()
-    val time: LiveData<Int> = timeLiveData
+  private val timeLiveData = MutableLiveData<Int>()
+  val time: LiveData<Int> = timeLiveData
 
-    private val rawData = MutableLiveData<ByteArray>().apply { value = byteArrayOf() }
-    val raw: LiveData<ByteArray> = rawData
+  private val rawData = MutableLiveData<ByteArray>().apply { value = byteArrayOf() }
+  val raw: LiveData<ByteArray> = rawData
 
-    private val isNavBarShownData = MutableLiveData<Boolean>()
-    val isNavBarShown: LiveData<Boolean>
-        get() {
-            launch {
-                val isEnable = withContext(IO) {
-                    GeneralUtils.hasNavBar(context.resources)
-                }
-                isNavBarShownData.postValue(isEnable)
-            }
-            return isNavBarShownData
+  private val isNavBarShownData = MutableLiveData<Boolean>()
+  val isNavBarShown: LiveData<Boolean>
+    get() {
+      launch {
+        val isEnable = withContext(IO) {
+          GeneralUtils.hasNavBar(context.resources)
         }
-
-    private val isSongFavLiveData = MutableLiveData<Boolean>()
-    private val lyrics: MutableLiveData<String> = MutableLiveData()
-
-    private val playbackStateObserver = Observer<PlaybackStateCompat> { playbackState ->
-        playbackState?.let {
-            currentStateBase.postValue(PlaybackState.pullPlaybackState(it))
-        }
+        isNavBarShownData.postValue(isEnable)
+      }
+      return isNavBarShownData
     }
 
-    private val nowMediaMetadataObserver = Observer<MediaMetadataCompat> { mediaMetaData ->
-        mediaMetaData?.let {
-            currentDataBase.postValue(MediaItemData.pullMediaMetadata(it) ?: return@let)
-        }
-    }
+  private val isSongFavLiveData = MutableLiveData<Boolean>()
+  private val lyrics: MutableLiveData<String> = MutableLiveData()
 
-    private val queueDataObserver = Observer<Queue> { queueData ->
-        queueData?.let {
-            queueDataBase.postValue(queueData)
-        }
+  private val playbackStateObserver = Observer<PlaybackStateCompat> { playbackState ->
+    playbackState?.let {
+      currentStateBase.postValue(PlaybackState.pullPlaybackState(it))
     }
+  }
 
-    private val mediaMediaConnection = mediaPlaybackConnection.also {
-        it.playbackState.observeForever(playbackStateObserver)
-        it.nowPlaying.observeForever(nowMediaMetadataObserver)
-        it.queueLiveData.observeForever(queueDataObserver)
-
-        it.isConnected.observeForever { connected ->
-            if (connected) {
-                it.transportControls?.sendCustomAction(SET_MEDIA_STATE, null)
-            }
-        }
+  private val nowMediaMetadataObserver = Observer<MediaMetadataCompat> { mediaMetaData ->
+    mediaMetaData?.let {
+      currentDataBase.postValue(MediaItemData.pullMediaMetadata(it) ?: return@let)
     }
+  }
 
-    fun update(newTime: Int) {
-        timeLiveData.postValue(newTime)
+  private val queueDataObserver = Observer<Queue> { queueData ->
+    queueData?.let {
+      queueDataBase.postValue(queueData)
     }
+  }
 
-    fun update(raw: ByteArray) {
-        if (rawData.value == null) {
-            rawData.postValue(raw)
-        } else if (!rawData.value!!.contentEquals(raw)) rawData.postValue(raw)
-    }
+  private val mediaMediaConnection = mediaPlaybackConnection.also {
+    it.playbackState.observeForever(playbackStateObserver)
+    it.nowPlaying.observeForever(nowMediaMetadataObserver)
+    it.queueLiveData.observeForever(queueDataObserver)
 
-    fun update(bindState: String = BIND_STATE_CANCELED) {
-        state = bindState
-        if (state == BIND_STATE_BOUND) bindTime()
+    it.isConnected.observeForever { connected ->
+      if (connected) {
+        it.transportControls?.sendCustomAction(SET_MEDIA_STATE, null)
+      }
     }
+  }
 
-    private fun bindTime() {
-        GlobalScope.launch {
-            while (true) {
-                delay(100)
-                mediaMediaConnection.mediaController ?: continue
-                val newTime = mediaMediaConnection.mediaController?.playbackState!!.position
-                if (state == BIND_STATE_BOUND) update(newTime.toInt())
-                if (state == BIND_STATE_CANCELED) break
-            }
-        }
-    }
+  fun update(newTime: Int) {
+    timeLiveData.postValue(newTime)
+  }
 
-    fun isSongFav(id: Long): LiveData<Boolean> {
-        launch {
-            val isFav = withContext(IO) {
-                favoritesRepository.songExist(id)
-            }
-            isSongFavLiveData.postValue(isFav)
-        }
-        return isSongFavLiveData
-    }
+  fun update(raw: ByteArray) {
+    if (rawData.value == null) {
+      rawData.postValue(raw)
+    } else if (!rawData.value!!.contentEquals(raw)) rawData.postValue(raw)
+  }
 
-    fun getLyrics(): LiveData<String> {
-        return lyrics
-    }
+  fun update(bindState: String = BIND_STATE_CANCELED) {
+    state = bindState
+    if (state == BIND_STATE_BOUND) bindTime()
+  }
 
-    fun updateLyrics(lyric: String? = null) {
-        lyrics.postValue(lyric)
+  private fun bindTime() {
+    GlobalScope.launch {
+      while (true) {
+        delay(100)
+        mediaMediaConnection.mediaController ?: continue
+        val newTime = mediaMediaConnection.mediaController?.playbackState!!.position
+        if (state == BIND_STATE_BOUND) update(newTime.toInt())
+        if (state == BIND_STATE_CANCELED) break
+      }
     }
+  }
 
-    override fun onCleared() {
-        super.onCleared()
-        mediaMediaConnection.playbackState.removeObserver(playbackStateObserver)
-        mediaMediaConnection.nowPlaying.removeObserver(nowMediaMetadataObserver)
-        mediaMediaConnection.queueLiveData.removeObserver(queueDataObserver)
+  fun isSongFav(id: Long): LiveData<Boolean> {
+    launch {
+      val isFav = withContext(IO) {
+        favoritesRepository.songExist(id)
+      }
+      isSongFavLiveData.postValue(isFav)
     }
+    return isSongFavLiveData
+  }
+
+  fun getLyrics(): LiveData<String> {
+    return lyrics
+  }
+
+  fun updateLyrics(lyric: String? = null) {
+    lyrics.postValue(lyric)
+  }
+
+  override fun onCleared() {
+    super.onCleared()
+    mediaMediaConnection.playbackState.removeObserver(playbackStateObserver)
+    mediaMediaConnection.nowPlaying.removeObserver(nowMediaMetadataObserver)
+    mediaMediaConnection.queueLiveData.removeObserver(queueDataObserver)
+  }
 }

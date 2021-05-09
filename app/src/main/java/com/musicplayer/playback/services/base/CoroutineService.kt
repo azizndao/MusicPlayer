@@ -5,20 +5,20 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 abstract class CoroutineService(
-    private val mainDispatcher: CoroutineDispatcher
+  private val mainDispatcher: CoroutineDispatcher
 ) : MediaBrowserServiceCompat() {
 
-    private val job = Job()
-    protected val scope = CoroutineScope(job + mainDispatcher)
+  private val job = Job()
+  protected val scope = CoroutineScope(job + mainDispatcher)
 
-    protected fun launch(
-        context: CoroutineContext = mainDispatcher,
-        start: CoroutineStart = CoroutineStart.DEFAULT,
-        block: suspend CoroutineScope.() -> Unit
-    ) = scope.launch(context, start, block)
+  protected fun launch(
+    context: CoroutineContext = mainDispatcher,
+    start: CoroutineStart = CoroutineStart.DEFAULT,
+    block: suspend CoroutineScope.() -> Unit
+  ) = scope.launch(context, start, block)
 
-    override fun onDestroy() {
-        super.onDestroy()
-        job.cancel()
-    }
+  override fun onDestroy() {
+    super.onDestroy()
+    job.cancel()
+  }
 }

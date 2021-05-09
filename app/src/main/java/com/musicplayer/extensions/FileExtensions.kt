@@ -11,24 +11,32 @@ private const val EXTERNAL_STORAGE = R.string.external_storage
 private const val MEGA_BYTES_SIZE = 1048576
 
 fun File.fixedPath(context: Context): String {
-    val storagePaths = getStoragePaths(context)
-    val type = path.contains(storagePaths[0])
-    Timber.d("fixedPath()")
-    return when{
-        storagePaths.isNotEmpty() && type -> path.replace(storagePaths[0], "/${context.getString(
-            INTERNAL_STORAGE
-        )}")
-        storagePaths.size > 1 && !type -> path.replace(storagePaths[1], "/${context.getString(
-            EXTERNAL_STORAGE
-        )}")
-        else -> path
-    }
+  val storagePaths = getStoragePaths(context)
+  val type = path.contains(storagePaths[0])
+  Timber.d("fixedPath()")
+  return when {
+    storagePaths.isNotEmpty() && type -> path.replace(
+      storagePaths[0], "/${
+        context.getString(
+          INTERNAL_STORAGE
+        )
+      }"
+    )
+    storagePaths.size > 1 && !type -> path.replace(
+      storagePaths[1], "/${
+        context.getString(
+          EXTERNAL_STORAGE
+        )
+      }"
+    )
+    else -> path
+  }
 }
 
 fun File.fixedName(context: Context): String {
-    return File(fixedPath(context)).name
+  return File(fixedPath(context)).name
 }
 
 fun File.sizeMB(): String? {
-    return "${length() / MEGA_BYTES_SIZE} MB"
+  return "${length() / MEGA_BYTES_SIZE} MB"
 }

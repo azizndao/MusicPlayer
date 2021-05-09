@@ -8,11 +8,11 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val notificationModule = module {
-    factory<NotificationManager> {
-        get<Application>().systemService(Context.NOTIFICATION_SERVICE)
-    }
+  factory<NotificationManager> {
+    get<Application>().systemService(Context.NOTIFICATION_SERVICE)
+  }
 
-    single {
-        NotificationsImplementation(get(), get())
-    } bind Notifications::class
+  single {
+    NotificationsImplementation(get(), get())
+  } bind Notifications::class
 }

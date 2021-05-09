@@ -18,95 +18,95 @@ import java.io.IOException
 import java.util.*
 
 object TagUtils {
-    fun writeTag(path: String, key: FieldKey, value: String): Boolean {
-        try {
-            val audioFile = AudioFileIO.read(Objects.requireNonNull(File(path)))
+  fun writeTag(path: String, key: FieldKey, value: String): Boolean {
+    try {
+      val audioFile = AudioFileIO.read(Objects.requireNonNull(File(path)))
 
-            audioFile.tag.setField(key, value)
-            audioFile.commit()
-            return true
-        } catch (ex: CannotReadException) {
-            Timber.e(ex)
-        } catch (ex: IOException) {
-            Timber.e(ex)
-        } catch (ex: TagException) {
-            Timber.e(ex)
-        } catch (ex: ReadOnlyFileException) {
-            Timber.e(ex)
-        } catch (ex: InvalidAudioFrameException) {
-            Timber.e(ex)
-        } catch (ex: IllegalArgumentException) {
-            Timber.e(ex)
-        } catch (ex: CannotWriteException) {
-            Timber.e(ex)
-        }
-        return false
+      audioFile.tag.setField(key, value)
+      audioFile.commit()
+      return true
+    } catch (ex: CannotReadException) {
+      Timber.e(ex)
+    } catch (ex: IOException) {
+      Timber.e(ex)
+    } catch (ex: TagException) {
+      Timber.e(ex)
+    } catch (ex: ReadOnlyFileException) {
+      Timber.e(ex)
+    } catch (ex: InvalidAudioFrameException) {
+      Timber.e(ex)
+    } catch (ex: IllegalArgumentException) {
+      Timber.e(ex)
+    } catch (ex: CannotWriteException) {
+      Timber.e(ex)
     }
+    return false
+  }
 
-    fun readTagsAsSong(context: Context, path: String): Song {
-        try {
-            val audioFile = AudioFileIO.read(Objects.requireNonNull(File(path)))
+  fun readTagsAsSong(context: Context, path: String): Song {
+    try {
+      val audioFile = AudioFileIO.read(Objects.requireNonNull(File(path)))
 
-            val song = Song.createFromAudioFile(audioFile)
-            val ids =
-                SongsRepositoryImplementation(context).getAlbumIdArtistId(song.album, song.artist)
-            song.artistId = ids[0]
-            song.albumId = ids[1]
-            if (song.title.isEmpty() || song.title.isBlank()) {
-                return Song(
-                    song.id,
-                    title = audioFile.file.name,
-                    artist = "Unknown",
-                    album = "Unknown",
-                    duration = song.duration,
-                    path = song.path
-                )
-            }
-            return song
-        } catch (ex: CannotReadException) {
-            Timber.e(ex)
-        } catch (ex: IOException) {
-            Timber.e(ex)
-        } catch (ex: TagException) {
-            Timber.e(ex)
-        } catch (ex: ReadOnlyFileException) {
-            Timber.e(ex)
-        } catch (ex: InvalidAudioFrameException) {
-            Timber.e(ex)
-        } catch (ex: IllegalArgumentException) {
-            Timber.e(ex)
-        } catch (ex: CannotWriteException) {
-            Timber.e(ex)
-        }
+      val song = Song.createFromAudioFile(audioFile)
+      val ids =
+        SongsRepositoryImplementation(context).getAlbumIdArtistId(song.album, song.artist)
+      song.artistId = ids[0]
+      song.albumId = ids[1]
+      if (song.title.isEmpty() || song.title.isBlank()) {
         return Song(
-            id = SONG_ID_DEFAULT,
-            title = File(path).name,
-            artist = "Unknown",
-            album = "Unknown",
-            path = path
+          song.id,
+          title = audioFile.file.name,
+          artist = "Unknown",
+          album = "Unknown",
+          duration = song.duration,
+          path = song.path
         )
+      }
+      return song
+    } catch (ex: CannotReadException) {
+      Timber.e(ex)
+    } catch (ex: IOException) {
+      Timber.e(ex)
+    } catch (ex: TagException) {
+      Timber.e(ex)
+    } catch (ex: ReadOnlyFileException) {
+      Timber.e(ex)
+    } catch (ex: InvalidAudioFrameException) {
+      Timber.e(ex)
+    } catch (ex: IllegalArgumentException) {
+      Timber.e(ex)
+    } catch (ex: CannotWriteException) {
+      Timber.e(ex)
     }
+    return Song(
+      id = SONG_ID_DEFAULT,
+      title = File(path).name,
+      artist = "Unknown",
+      album = "Unknown",
+      path = path
+    )
+  }
 
-    fun readExtraTags(path: String, queuePosition: String = ""): ExtraInfo {
-        try {
-            val audioFile = AudioFileIO.read(Objects.requireNonNull(File(path)))
+  fun readExtraTags(path: String, queuePosition: String = ""): ExtraInfo {
+    try {
+      val audioFile = AudioFileIO.read(Objects.requireNonNull(File(path)))
 
-            return ExtraInfo.createFromAudioFile(audioFile, queuePosition)
-        } catch (ex: CannotReadException) {
-            Timber.e(ex)
-        } catch (ex: IOException) {
-            Timber.e(ex)
-        } catch (ex: TagException) {
-            Timber.e(ex)
-        } catch (ex: ReadOnlyFileException) {
-            Timber.e(ex)
-        } catch (ex: InvalidAudioFrameException) {
-            Timber.e(ex)
-        } catch (ex: IllegalArgumentException) {
-            Timber.e(ex)
-        } catch (ex: CannotWriteException) {
-            Timber.e(ex)
-        }
-        return ExtraInfo("", File(path).extension,"", queuePosition)
+      return ExtraInfo.createFromAudioFile(audioFile, queuePosition)
+    } catch (ex: CannotReadException) {
+      Timber.e(ex)
+    } catch (ex: IOException) {
+      Timber.e(ex)
+    } catch (ex: TagException) {
+      Timber.e(ex)
+    } catch (ex: ReadOnlyFileException) {
+      Timber.e(ex)
+    } catch (ex: InvalidAudioFrameException) {
+      Timber.e(ex)
+    } catch (ex: IllegalArgumentException) {
+      Timber.e(ex)
+    } catch (ex: CannotWriteException) {
+      Timber.e(ex)
     }
+    return ExtraInfo("", File(path).extension, "", queuePosition)
+  }
 }

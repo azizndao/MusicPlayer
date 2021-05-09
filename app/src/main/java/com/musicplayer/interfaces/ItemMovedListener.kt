@@ -14,5 +14,5 @@
 package com.musicplayer.interfaces
 
 interface ItemMovedListener {
-    fun itemMoved(from: Int, to: Int)
+  fun itemMoved(from: Int, to: Int)
 }

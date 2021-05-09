@@ -14,5 +14,5 @@
 package com.musicplayer.interfaces
 
 interface LoadEventController {
-    fun onPrepared()
+  fun onPrepared()
 }

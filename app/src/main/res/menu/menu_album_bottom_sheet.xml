@@ -2,13 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item
-    android:id="@+id/action_play_all"
-    android:icon="@drawable/ic_play"
-    android:title="@string/play_all" />
-  <item
     android:id="@+id/action_shuffle_play"
     android:icon="@drawable/ic_play"
     android:title="@string/shuffle_and_play" />
+  <item
+    android:id="@+id/action_album_art"
+    android:icon="@drawable/ic_insert_photo"
+    android:title="@string/album_cover" />
+  <item
+    android:id="@+id/action_edit_tags"
+    android:icon="@drawable/ic_edit"
+    android:title="@string/edit_tags" />
   <item
     android:id="@+id/action_add_to_playlist"
     android:icon="@drawable/ic_playlist_add"
@@ -21,12 +25,4 @@
     android:id="@+id/action_after_current_playlist"
     android:icon="@drawable/ic_playlist_play"
     android:title="@string/play_after_current_playlist" />
-  <item
-    android:id="@+id/action_album_art"
-    android:icon="@drawable/ic_insert_photo"
-    android:title="@string/album_cover" />
-  <item
-    android:id="@+id/action_edit_tags"
-    android:icon="@drawable/ic_edit"
-    android:title="@string/edit_tags" />
 </menu>

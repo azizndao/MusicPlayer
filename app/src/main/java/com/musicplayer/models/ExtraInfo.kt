@@ -8,27 +8,27 @@ import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.tag.FieldKey
 
 data class ExtraInfo(
-    val bitRate: String,
-    val fileType: String,
-    val frequency: String,
-    val queuePosition: String
-){
-    companion object{
-        fun fromString(info: String): ExtraInfo{
-            return Gson().fromJson(info)
-        }
-
-        fun createFromAudioFile(audioFile: AudioFile, queuePosition: String): ExtraInfo {
-            return ExtraInfo(
-                audioFile.audioHeader.bitRate.addIfNotEmpty("kbps"),
-                audioFile.file.extension,
-                audioFile.audioHeader.sampleRate.khz().addIfNotEmpty("khz"),
-                queuePosition
-            )
-        }
+  val bitRate: String,
+  val fileType: String,
+  val frequency: String,
+  val queuePosition: String
+) {
+  companion object {
+    fun fromString(info: String): ExtraInfo {
+      return Gson().fromJson(info)
     }
 
-    override fun toString(): String {
-        return Gson().toJson(this)
+    fun createFromAudioFile(audioFile: AudioFile, queuePosition: String): ExtraInfo {
+      return ExtraInfo(
+        audioFile.audioHeader.bitRate.addIfNotEmpty("kbps"),
+        audioFile.file.extension,
+        audioFile.audioHeader.sampleRate.khz().addIfNotEmpty("khz"),
+        queuePosition
+      )
     }
+  }
+
+  override fun toString(): String {
+    return Gson().toJson(this)
+  }
 }

@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  tools:context=".ui.fragments.AlbumListFragment">
+  tools:context=".ui.albums.AlbumListFragment">
 
-  <FrameLayout
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/albums"
+    paddingBottomSystemWindowInsets="@{true}"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/albums"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:clipToPadding="false"
-      android:padding="@dimen/album_item_margin"
-      tools:itemCount="10"
-      tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-      tools:listitem="@layout/item_album"
-      tools:spanCount="3" />
-
-  </FrameLayout>
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:padding="@dimen/album_item_margin"
+    tools:itemCount="12"
+    tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+    tools:listitem="@layout/item_album"
+    tools:spanCount="3" />
 </layout>
