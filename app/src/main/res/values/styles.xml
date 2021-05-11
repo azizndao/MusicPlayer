@@ -16,4 +16,12 @@
   <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
     <item name="cardBackgroundColor">?cardBackgroundColor</item>
   </style>
+
+  <style name="AppTheme_Black">Dark theme mode</style>
+
+  <style name="AppTheme_Dark">Dark theme mode</style>
+
+  <style name="AppTheme_Light">Light theme mode</style>
+
+  <style name="AppTheme_Auto">System theme</style>
 </resources>

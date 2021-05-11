@@ -2,6 +2,7 @@ package com.musicplayer.utils
 
 import android.net.Uri
 import android.provider.MediaStore
+import com.musicplayer.R
 
 object Constants {
 
@@ -59,6 +60,7 @@ object Constants {
   const val DEPTH_PAGE_TRANSFORMER = "depth_page_transformer"
   const val CUBE_TRANSFORMER = "cube_transformer"
   const val FAVORITE_ID = -7440L
+  const val FAVORITE_NAME = "${R.string.favorites}"
 
   const val FAVORITE_TYPE = "Favorite"
   const val ALBUM_TYPE = "Album"

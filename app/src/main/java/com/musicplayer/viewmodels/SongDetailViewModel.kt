@@ -24,7 +24,7 @@ import com.musicplayer.models.PlaybackState
 import com.musicplayer.models.Queue
 import com.musicplayer.playback.PlaybackConnection
 import com.musicplayer.repository.FavoritesRepository
-import com.musicplayer.ui.viewmodels.base.CoroutineViewModel
+import com.musicplayer.viewmodels.base.CoroutineViewModel
 import com.musicplayer.utils.Constants.BIND_STATE_BOUND
 import com.musicplayer.utils.Constants.BIND_STATE_CANCELED
 import com.musicplayer.utils.Constants.SET_MEDIA_STATE

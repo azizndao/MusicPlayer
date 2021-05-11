@@ -18,21 +18,44 @@ import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.load.resource.drawable.DrawableDecoderCompat
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.elevation.ElevationOverlayProvider
 import com.musicplayer.R
+import com.musicplayer.extensions.getColorByTheme
 
-@BindingAdapter("albumArtFromId", "albumArtPlaceholder", requireAll = false)
-fun ImageView.loadAlbumArt(albumId: Long, placeholder: Drawable? = null) {
-  val drawable = placeholder ?: ResourcesCompat.getDrawable(
-    resources,
-    R.drawable.album_placeholder,
-    context.theme
-  )
+@BindingAdapter("peekHeight")
+fun View.peekHeight(previous: Boolean = false, value: Boolean = false) {
+  if (previous == value) return
+  val behavior = BottomSheetBehavior.from(this)
+  doOnApplyWindowInsets { _, insets, _, _, _ ->
+    with(behavior) {
+      setPeekHeight(
+        insets.systemWindowInsetBottom + context.pixelsToDimen(64f).toInt()
+      )
+    }
+  }
+}
+
+@BindingAdapter("albumArtFromId", "albumArtPlaceholder", "albumErrorDrawable", requireAll = false)
+fun ImageView.loadAlbumArt(
+  albumId: Long,
+  placeholderDrawable: Drawable? = null,
+  errorDrawable: Drawable? = null
+) {
+  val placeholder = placeholderDrawable
+    ?: ColorDrawable(context.getColorByTheme(R.attr.colorControlHighlight))
+
+  val error = errorDrawable
+    ?: DrawableDecoderCompat.getDrawable(context, R.drawable.album_placeholder, context.theme)
+
   val uri = GeneralUtils.getAlbumArtUri(albumId)
   Glide.with(context).load(uri)
-    .placeholder(drawable)
-    .error(drawable)
+    .placeholder(placeholder)
+    .error(error)
+    .transition(DrawableTransitionOptions.withCrossFade())
     .into(this)
 }
 

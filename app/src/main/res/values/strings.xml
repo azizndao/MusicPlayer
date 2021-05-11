@@ -13,10 +13,11 @@
   <string name="songs">Songs</string>
   <string name="internal_storage">Phone</string>
   <string name="external_storage">SD Card</string>
-  <string name="with_separator">%s - %s</string>
+  <string name="with_separator" formatted="false" translatable="false">%s - %s</string>
   <string name="all_songs">All songs</string>
   <string name="others">Others</string>
-  <string name="numberOfSongs">%s songs</string>
+  <string name="song_count">%s songs</string>
+  <string name="album_count">%s albums</string>
   <string name="play_all">Play all</string>
   <string name="random">Randomly</string>
   <string name="album_cover">Album cover image</string>
@@ -30,4 +31,7 @@
   <string name="sort">Sort</string>
   <string name="album_detail_transition_name">album_detail_transition_name</string>
   <string name="album_transition_name">album_transition_name-%d</string>
+  <string name="favorites">favorites</string>
+  <string name="cannot_read_file">Cannot read file %s</string>
+  <string name="empty_content">There are nothing here</string>
 </resources>

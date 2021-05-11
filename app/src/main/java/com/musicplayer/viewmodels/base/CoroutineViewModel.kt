@@ -1,4 +1,4 @@
-package com.musicplayer.ui.viewmodels.base
+package com.musicplayer.viewmodels.base
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*

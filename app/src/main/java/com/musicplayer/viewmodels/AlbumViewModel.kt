@@ -1,11 +1,11 @@
-package com.musicplayer.ui.viewmodels
+package com.musicplayer.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.musicplayer.models.Album
 import com.musicplayer.models.Song
 import com.musicplayer.repository.AlbumsRepository
-import com.musicplayer.ui.viewmodels.base.CoroutineViewModel
+import com.musicplayer.viewmodels.base.CoroutineViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.withContext

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent" >
+  <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
     <item name="cornerSize">?cornerSizeLargeComponent</item>
     <item name="cornerFamily">rounded</item>
   </style>
@@ -13,5 +13,10 @@
 
   <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
     <item name="cornerSize">?cornerSizeSmallComponent</item>
-    <item name="cornerFamily">rounded</item></style>
+    <item name="cornerFamily">rounded</item>
+  </style>
+
+  <style name="ShapeAppearance.App.RoundedComponent" parent="">
+    <item name="cornerSize">50%</item>
+  </style>
 </resources>

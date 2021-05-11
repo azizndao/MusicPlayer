@@ -82,7 +82,7 @@ class NotificationsImplementation(
 
     val builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {
       setStyle(style)
-      setSmallIcon(R.drawable.ic_app_logo)
+      setSmallIcon(R.drawable.ic_library_music)
       setLargeIcon(artwork)
       setContentIntent(clickIntent)
       setContentTitle(trackName)
@@ -140,7 +140,7 @@ class NotificationsImplementation(
   private fun createEmptyNotification(): Notification {
     createNotificationChannel()
     return NotificationCompat.Builder(context, CHANNEL_ID).apply {
-      setSmallIcon(R.drawable.ic_app_logo)
+      setSmallIcon(R.drawable.ic_music_note)
       setContentTitle(context.getString(R.string.app_name))
       setColorized(true)
       setShowWhen(false)

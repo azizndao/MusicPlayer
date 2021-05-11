@@ -13,6 +13,19 @@
     <action
       android:id="@+id/action_homeFragment_to_albumDetailsFragment"
       app:destination="@id/albumDetailsFragment" />
+    <action
+      android:id="@+id/action_homeFragment_to_artistDetailsFragment"
+      app:destination="@id/artistDetailsFragment" />
+    <deepLink
+      android:id="@+id/deepLink"
+      app:action="ACTION_VIEW"
+      app:mimeType="audio/*"
+      app:uri="file://*" />
+    <deepLink
+      android:id="@+id/deepLink2"
+      app:action="ACTION_VIEW"
+      app:mimeType="application/ogg"
+      app:uri="content://*" />
   </fragment>
 
   <fragment
@@ -44,4 +57,13 @@
   <action
     android:id="@+id/action_global_searchFragment"
     app:destination="@id/searchFragment" />
+  <fragment
+    android:id="@+id/artistDetailsFragment"
+    android:name="com.musicplayer.ui.artistDetails.ArtistDetailsFragment"
+    android:label="ArtistDetailsFragment"
+    tools:layout="@layout/fragment_artist_details">
+    <argument
+      android:name="artistId"
+      app:argType="long" />
+  </fragment>
 </navigation>

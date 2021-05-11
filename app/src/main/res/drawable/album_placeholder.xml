@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <item android:drawable="@drawable/ic_album" />
-
-  <item>
+  <item
+    android:width="200dp"
+    android:height="200dp">
     <shape
       android:shape="rectangle"
       android:tint="?colorControlHighlight" />
   </item>
+
+  <item
+    android:width="130dp"
+    android:height="130dp"
+    android:drawable="@drawable/ic_music_note"
+    android:gravity="center" />
+
 </layer-list>

@@ -1,17 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   tools:context=".ui.albums.AlbumListFragment">
 
-  <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/albums"
-    paddingBottomSystemWindowInsets="@{true}"
+  <data>
+
+    <variable
+      name="isEmpty"
+      type="Boolean" />
+
+    <variable
+      name="loaded"
+      type="Boolean" />
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:padding="@dimen/album_item_margin"
-    tools:itemCount="12"
-    tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-    tools:listitem="@layout/item_album"
-    tools:spanCount="3" />
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/albums"
+      paddingBottomSystemWindowInsets="@{true}"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipToPadding="false"
+      android:padding="@dimen/album_item_margin"
+      app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+      app:spanCount="2"
+      tools:itemCount="6"
+      tools:listitem="@layout/item_album" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/face"
+      goneIf="@{!isEmpty}"
+      android:layout_width="?actionBarSize"
+      android:layout_height="?actionBarSize"
+      app:layout_constraintBottom_toTopOf="@id/description"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.3"
+      app:layout_constraintVertical_chainStyle="packed"
+      app:srcCompat="@drawable/ic_sentiment_very_dissatisfied" />
+
+    <TextView
+      android:id="@+id/description"
+      goneIf="@{!isEmpty}"
+      marginBottomSystemWindowInsets="@{true}"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_margin="16dp"
+      android:gravity="center_horizontal"
+      android:text="@string/empty_content"
+      android:textAppearance="?textAppearanceHeadline5"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/face" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+      android:id="@+id/progress_circular"
+      goneIf="@{loaded}"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:indeterminate="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.3" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

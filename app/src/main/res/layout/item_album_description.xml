@@ -75,7 +75,7 @@
       android:layout_height="wrap_content"
       android:ellipsize="end"
       android:maxLines="1"
-      android:text="@{@string/numberOfSongs(album.songCount)}"
+      android:text="@{@string/song_count(album.songCount)}"
       android:textAppearance="?textAppearanceCaption"
       app:layout_constraintEnd_toEndOf="@id/title"
       app:layout_constraintStart_toStartOf="@id/title"

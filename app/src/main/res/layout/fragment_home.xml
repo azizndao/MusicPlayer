@@ -7,7 +7,6 @@
   <androidx.coordinatorlayout.widget.CoordinatorLayout
     marginLeftSystemWindowInsets="@{true}"
     marginRightSystemWindowInsets="@{true}"
-    marginTopSystemWindowInsets="@{true}"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:transitionGroup="true">
@@ -21,6 +20,7 @@
 
       <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
+        paddingTopSystemWindowInsets="@{true}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_scrollFlags="scroll"
@@ -39,6 +39,18 @@
       android:layout_height="match_parent"
       app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <com.google.android.material.card.MaterialCardView
+      android:id="@+id/bottom_sheet"
+      peekHeight="@{true}"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:cardCornerRadius="0dp"
+      app:cardElevation="8dp"
+      app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+      tools:behavior_peekHeight="64dp">
+
+      <include layout="@layout/collapsed_song_bottom_sheet" />
+    </com.google.android.material.card.MaterialCardView>
   </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

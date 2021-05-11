@@ -1,4 +1,4 @@
-package com.musicplayer.ui.viewmodels
+package com.musicplayer.viewmodels
 
 import com.crrl.beatplayer.ui.viewmodels.SettingsViewModel
 import com.crrl.beatplayer.ui.viewmodels.SongDetailViewModel
@@ -7,7 +7,7 @@ import org.koin.dsl.module
 
 
 val viewModelModule = module {
-  single { MainViewModel(get(), get(), get(), get(), get(), get()) }
+  single { MainViewModel(get(), get(), get(), get()) }
   viewModel { SongDetailViewModel(get(), get(), get()) }
   viewModel { SettingsViewModel(get()) }
   viewModel { PlaylistViewModel(get()) }

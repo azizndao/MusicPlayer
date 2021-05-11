@@ -8,22 +8,22 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val playbackModule = module {
-  factory {
-    AudioPlayerImplementation(get())
-  } bind (AudioPlayer::class)
+    factory {
+        AudioPlayerImplementation(get())
+    } bind (AudioPlayer::class)
 
-  factory {
-    AudioFocusHelperImplementation(get())
-  } bind (AudioFocusHelper::class)
+    factory {
+        AudioFocusHelperImplementation(get())
+    } bind (AudioFocusHelper::class)
 
-  factory {
-    BeatPlayerImplementation(
-      get(),
-      get(),
-      get(),
-      get(),
-      get(),
-      get()
-    )
-  } bind (BeatPlayer::class)
+    factory {
+        BeatPlayerImplementation(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    } bind (BeatPlayer::class)
 }

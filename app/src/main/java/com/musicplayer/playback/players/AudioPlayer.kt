@@ -1,15 +1,28 @@
+/*
+ * Copyright (c) 2020. Carlos René Ramos López. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.musicplayer.playback.players
 
 import android.app.Application
 import android.net.Uri
-import com.musicplayer.utils.LoadController
+import com.google.android.exoplayer2.*
+import com.google.android.exoplayer2.audio.AudioAttributes
+import com.google.android.exoplayer2.util.PriorityTaskManager
 import com.musicplayer.alias.OnCompletion
 import com.musicplayer.alias.OnError
 import com.musicplayer.alias.OnPrepared
 import com.musicplayer.interfaces.LoadEventController
-import com.google.android.exoplayer2.*
-import com.google.android.exoplayer2.audio.AudioAttributes
-import com.google.android.exoplayer2.util.PriorityTaskManager
+import com.musicplayer.utils.LoadController
 import java.io.File
 
 interface AudioPlayer {
@@ -129,15 +142,13 @@ class AudioPlayerImplementation(
 
   private fun createPlayer(owner: AudioPlayerImplementation): ExoPlayer {
     return SimpleExoPlayer.Builder(context)
-      .setLoadControl(LoadController().apply {
-        eventController = owner
-      })
+      .setLoadControl(LoadController().apply { eventController = owner })
       .build().apply {
         val attr = AudioAttributes.Builder().apply {
           setContentType(C.CONTENT_TYPE_MUSIC)
           setUsage(C.USAGE_MEDIA)
         }.build()
-
+        setThrowsWhenUsingWrongThread(false)
         setAudioAttributes(attr, false)
         setPriorityTaskManager(PriorityTaskManager())
         addListener(owner)

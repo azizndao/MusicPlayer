@@ -18,24 +18,23 @@ import com.musicplayer.models.Song
 import com.musicplayer.ui.dialogs.AlbumMenuDialogFragmentDirections
 import com.musicplayer.ui.search.SearchFragmentDirections
 import com.musicplayer.ui.songs.SongListAdapter
-import com.musicplayer.ui.viewmodels.AlbumViewModel
-import com.musicplayer.ui.viewmodels.MainViewModel
 import com.musicplayer.utils.Constants
 import com.musicplayer.utils.GeneralUtils
+import com.musicplayer.utils.SpringAddItemAnimator
 import com.musicplayer.utils.themeColor
+import com.musicplayer.viewmodels.MainViewModel
 import org.koin.android.ext.android.inject
 
 class AlbumDetailsFragment : Fragment(),
   SongListAdapter.Listener,
   Toolbar.OnMenuItemClickListener {
 
-  private lateinit var songs: List<Song>
   private lateinit var binding: FragmentAlbumDetailsBinding
   private val args by navArgs<AlbumDetailsFragmentArgs>()
-  private val albumViewModel by inject<AlbumViewModel>()
-  private val mainViewModel by inject<MainViewModel>()
-  private val mAlbum by lazy { albumViewModel.getAlbum(args.albumId) }
+  private val viewModel by inject<MainViewModel>()
+  private val mAlbum by lazy { viewModel.getAlbum(args.albumId) }
   private val mAdapter = SongListAdapter(this)
+  private val songs get() = mAdapter.currentList
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -61,30 +60,27 @@ class AlbumDetailsFragment : Fragment(),
       setOnPlayAllClick { onPlayAllClick() }
       setOnPlayRandomlyClick { onPlayRandomlyClick() }
       toolbar.setOnMenuItemClickListener(this@AlbumDetailsFragment)
-      list.adapter = mAdapter.also(::subscribeUi)
+      songs.adapter = mAdapter.also(::subscribeUi)
+      songs.itemAnimator = SpringAddItemAnimator()
     }
   }
 
   private fun subscribeUi(adapter: SongListAdapter) {
-    albumViewModel.getSongsByAlbum(args.albumId).observe(viewLifecycleOwner) {
+    viewModel.getSongsByAlbum(args.albumId).observe(viewLifecycleOwner) {
       adapter.submitList(it)
-      this.songs = it
     }
   }
 
-  private fun onPlayAllClick() {
-    val extras = GeneralUtils.getExtraBundle(songs.toIDList(), Constants.ALBUM_KEY)
-    mainViewModel.mediaItemClicked(songs.first().toMediaItem(), extras)
-  }
+  private fun onPlayAllClick() = viewModel.playAlbum(mAlbum)
 
   private fun onPlayRandomlyClick() {
     val extras = GeneralUtils.getExtraBundle(songs.toIDList(), mAlbum.title)
-    mainViewModel.transportControls()?.sendCustomAction(Constants.PLAY_ALL_SHUFFLED, extras)
+    viewModel.transportControls()?.sendCustomAction(Constants.PLAY_ALL_SHUFFLED, extras)
   }
 
   override fun onSongClick(song: Song) {
     val extras = GeneralUtils.getExtraBundle(songs.toIDList(), mAlbum.title)
-    mainViewModel.mediaItemClicked(songs.first().toMediaItem(), extras)
+    viewModel.mediaItemClicked(song.toMediaItem(), extras)
   }
 
   override fun onSongLongClick(song: Song) {

@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.transition.MaterialElevationScale
 import com.musicplayer.databinding.FragmentAlbumMenuDialogBinding
-import com.musicplayer.ui.viewmodels.AlbumViewModel
+import com.musicplayer.viewmodels.AlbumViewModel
 import com.musicplayer.utils.GeneralUtils.generatePaletteFromAlbumArt
 import com.musicplayer.utils.sortToast
 import org.koin.android.ext.android.inject
@@ -24,6 +23,12 @@ class AlbumMenuDialogFragment : AppCompatDialogFragment(),
   private val albumViewModel by inject<AlbumViewModel>()
   private val args by navArgs<AlbumMenuDialogFragmentArgs>()
   private val mAlbum by lazy { albumViewModel.getAlbum(args.albumId) }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    enterTransition = MaterialElevationScale(true)
+    exitTransition = MaterialElevationScale(false)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -41,13 +46,7 @@ class AlbumMenuDialogFragment : AppCompatDialogFragment(),
       options.setNavigationItemSelectedListener(this@AlbumMenuDialogFragment)
       generatePaletteFromAlbumArt(mAlbum.id) { palette ->
         palette ?: return@generatePaletteFromAlbumArt root.sortToast("Palette can't be generated")
-        val localNightMode = (requireActivity() as AppCompatActivity).delegate.localNightMode
-        val imageSwatch = if (localNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
-          palette.darkMutedSwatch
-        } else {
-          palette.lightMutedSwatch
-        }
-        imageSwatch?.let { swatch ->
+        palette.dominantSwatch?.let { swatch ->
           btnClose.setColorFilter(swatch.bodyTextColor)
           headerBg.setBackgroundColor(swatch.rgb)
           title.setTextColor(swatch.bodyTextColor)

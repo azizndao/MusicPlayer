@@ -12,11 +12,11 @@ import android.support.v4.media.session.PlaybackStateCompat
 import android.support.v4.media.session.PlaybackStateCompat.*
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import com.musicplayer.playback.AudioFocusHelper
 import com.musicplayer.R
 import com.musicplayer.alias.*
 import com.musicplayer.extensions.*
 import com.musicplayer.models.Song
-import com.musicplayer.playback.AudioFocusHelper
 import com.musicplayer.repository.SongsRepository
 import com.musicplayer.utils.Constants.BY_UI_KEY
 import com.musicplayer.utils.Constants.REPEAT_ALL

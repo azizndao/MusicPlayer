@@ -15,7 +15,7 @@ package com.crrl.beatplayer.ui.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.musicplayer.ui.viewmodels.base.CoroutineViewModel
+import com.musicplayer.viewmodels.base.CoroutineViewModel
 import com.musicplayer.utils.SettingsUtility
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main

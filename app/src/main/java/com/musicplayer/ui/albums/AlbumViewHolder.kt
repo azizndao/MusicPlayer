@@ -17,7 +17,6 @@ class AlbumViewHolder(
         it.setOnLongClickListener { view -> listener.onAlbumLongClick(view, data); true }
       }
       btnPlay.setOnClickListener { listener.onAlbumPlayClick(data) }
-      btnMore.setOnClickListener { listener.onAlbumMenuClick(data) }
     }
   }
 }

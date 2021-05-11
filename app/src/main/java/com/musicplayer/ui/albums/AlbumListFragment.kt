@@ -10,25 +10,24 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.musicplayer.R
 import com.musicplayer.databinding.FragmentAlbumListBinding
-import com.musicplayer.extensions.observeOnce
-import com.musicplayer.extensions.toIDList
 import com.musicplayer.models.Album
 import com.musicplayer.ui.albumdetails.AlbumDetailsFragmentDirections
 import com.musicplayer.ui.home.HomeFragmentDirections
-import com.musicplayer.ui.viewmodels.AlbumViewModel
-import com.musicplayer.ui.viewmodels.MainViewModel
-import com.musicplayer.utils.Constants
 import com.musicplayer.utils.GeneralUtils
+import com.musicplayer.utils.SpringAddItemAnimator
+import com.musicplayer.viewmodels.MainViewModel
 import org.koin.android.ext.android.inject
 
-class AlbumListFragment : Fragment(), AlbumListAdapter.Listener {
+class AlbumListFragment : Fragment(),
+  AlbumListAdapter.Listener {
 
-  private val albumViewModel by inject<AlbumViewModel>()
-  private val mainViewModel by inject<MainViewModel>()
   private lateinit var binding: FragmentAlbumListBinding
+  private val viewModel by inject<MainViewModel>()
+  private val albumListAdapter = AlbumListAdapter(this)
 
   override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
+    inflater: LayoutInflater,
+    container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
     binding = FragmentAlbumListBinding.inflate(inflater, container, false)
@@ -40,10 +39,18 @@ class AlbumListFragment : Fragment(), AlbumListAdapter.Listener {
     with(binding) {
       val orientation = GeneralUtils.getOrientation(requireContext())
       val spanCount = if (orientation == GeneralUtils.PORTRAIT) 2 else 4
+      albums.itemAnimator = SpringAddItemAnimator()
       albums.layoutManager = GridLayoutManager(requireContext(), spanCount)
-      albums.adapter = AlbumListAdapter(this@AlbumListFragment).also { adapter ->
-        albumViewModel.getAlbums().observe(viewLifecycleOwner) { data -> adapter.submitList(data) }
-      }
+      albums.adapter = albumListAdapter
+      subscribeUI()
+    }
+  }
+
+  private fun FragmentAlbumListBinding.subscribeUI() {
+    viewModel.getAllAlbums().observe(viewLifecycleOwner) { data ->
+      loaded = true
+      isEmpty = data.isEmpty()
+      albumListAdapter.submitList(data)
     }
   }
 
@@ -53,12 +60,7 @@ class AlbumListFragment : Fragment(), AlbumListAdapter.Listener {
     findNavController().navigate(directions, extras)
   }
 
-  override fun onAlbumPlayClick(album: Album) {
-    albumViewModel.getSongsByAlbum(album.id).observeOnce { songs ->
-      val extras = GeneralUtils.getExtraBundle(songs.toIDList(), Constants.ALBUM_KEY)
-      mainViewModel.mediaItemClicked(songs.first().toMediaItem(), extras)
-    }
-  }
+  override fun onAlbumPlayClick(album: Album) = viewModel.playAlbum(album)
 
   override fun onAlbumLongClick(view: View, album: Album) {
 
